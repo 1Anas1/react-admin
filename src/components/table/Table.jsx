@@ -66,8 +66,6 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">Tracking ID</TableCell>
-           
-            <TableCell className="tableCell">Customer</TableCell>
             <TableCell className="tableCell">Date</TableCell>
             <TableCell className="tableCell">Amount</TableCell>
             <TableCell className="tableCell">Payment Method</TableCell>
@@ -78,8 +76,6 @@ const List = () => {
           {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell className="tableCell">{row.id}</TableCell>
-             
-              <TableCell className="tableCell">{row.customer}</TableCell>
               <TableCell className="tableCell">{row.date}</TableCell>
               <TableCell className="tableCell">{row.amount}</TableCell>
               <TableCell className="tableCell">{row.method}</TableCell>
