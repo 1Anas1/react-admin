@@ -11,7 +11,7 @@ const List = () => {
       <div className="listContainer">
         <Navbar/>
         <Datatable/>
-        
+        <DatatableClientPro />
       </div>
     </div>
   )

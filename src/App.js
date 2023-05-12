@@ -8,11 +8,11 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-<<<<<<< HEAD
+
 import ListShops from "./pages/list/ListShops";
-=======
+
 import SinglePro from "./pages/single/SinglePro";
->>>>>>> 48e68bf8fbda70b37f37fa8a33c3f89247fd0f2b
+
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
