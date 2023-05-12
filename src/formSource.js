@@ -1,13 +1,13 @@
 export const userInputs = [
     {
       id: 1,
-      label: "Username",
+      label: "Firt name",
       type: "text",
       placeholder: "john_doe",
     },
     {
       id: 2,
-      label: "Name and surname",
+      label: "Last name",
       type: "text",
       placeholder: "John Doe",
     },
@@ -28,18 +28,7 @@ export const userInputs = [
       label: "Password",
       type: "password",
     },
-    {
-      id: 6,
-      label: "Address",
-      type: "text",
-      placeholder: "Elton St. 216 NewYork",
-    },
-    {
-      id: 7,
-      label: "Country",
-      type: "text",
-      placeholder: "USA",
-    },
+    
   ];
   
   export const productInputs = [
