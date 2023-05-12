@@ -4,7 +4,7 @@ import { userColumns, userRows } from "../../datatablesourceprincipal";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Datatable = () => {
+const Datatablemember = () => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -36,7 +36,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-      Utilisateur Principal
+      Members
         <Link to="/users/new" className="link">
           Add New
         </Link>
@@ -53,4 +53,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default Datatablemember;
