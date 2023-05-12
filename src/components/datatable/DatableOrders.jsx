@@ -1,10 +1,10 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesourceprincipal";
+import { userColumns, userRows } from "../../sourceOrders";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const DatatableClientPro = () => {
+const DatatableOrders = () => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -19,7 +19,7 @@ const DatatableClientPro = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/pro/test" style={{ textDecoration: "none" }}>
+            <Link to="/users/test" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -36,9 +36,9 @@ const DatatableClientPro = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Professional Clients
+    Principal Users
         <Link to="/users/new" className="link">
-          Add New Professionel Client
+          Add New Principal
         </Link>
       </div>
       <DataGrid
@@ -53,4 +53,4 @@ const DatatableClientPro = () => {
   );
 };
 
-export default DatatableClientPro;
+export default DatatableOrders;

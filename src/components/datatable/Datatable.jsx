@@ -38,7 +38,7 @@ const Datatable = () => {
       <div className="datatableTitle">
     Principal Users
         <Link to="/users/new" className="link">
-          Add New
+          Add New Principal
         </Link>
       </div>
       <DataGrid

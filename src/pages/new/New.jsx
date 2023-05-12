@@ -7,6 +7,8 @@ import { useState } from "react";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
 
+
+
   return (
     <div className="new">
       <Sidebar />
