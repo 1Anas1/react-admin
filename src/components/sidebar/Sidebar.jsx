@@ -20,7 +20,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none",display:'flex',alignItems:'center',justifyContent:'center' }}>
         <img src={process.env.PUBLIC_URL+'logoo.png'} width='150px' alt="cashless" />
         </Link>
       </div>
