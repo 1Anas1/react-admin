@@ -30,7 +30,7 @@ export const userInputs = [
     },
     
   ];
-  
+ 
   export const productInputs = [
     {
       id: 1,
