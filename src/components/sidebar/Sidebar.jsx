@@ -21,7 +21,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Cashless</span>
+        <img src={process.env.PUBLIC_URL+'logoo.png'} width='150px' alt="cashless" />
         </Link>
       </div>
       <hr />
