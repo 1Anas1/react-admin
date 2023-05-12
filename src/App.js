@@ -8,11 +8,9 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-<<<<<<< HEAD
 import ListShops from "./pages/list/ListShops";
-=======
 import SinglePro from "./pages/single/SinglePro";
->>>>>>> 48e68bf8fbda70b37f37fa8a33c3f89247fd0f2b
+import SingleShop from "./pages/single/SingleShop";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -40,7 +38,9 @@ function App() {
             </Route>
             <Route path="products">
               <Route index element={<ListShops />} />
-              <Route path=":productId" element={<Single />} />
+              <Route path="shop">
+              <Route path=":productId" element={<SingleShop />} />
+              </Route>
               <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
