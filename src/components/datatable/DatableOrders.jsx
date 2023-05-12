@@ -38,7 +38,7 @@ const DatatableOrders = () => {
       <div className="datatableTitle">
     Principal Users
         <Link to="/users/new" className="link">
-          Add New Principal
+          Add New Order
         </Link>
       </div>
       <DataGrid
