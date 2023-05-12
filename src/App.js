@@ -8,8 +8,10 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+
 import ListShops from "./pages/list/ListShops";
 import SinglePro from "./pages/single/SinglePro";
+
 import SingleShop from "./pages/single/SingleShop";
 
 function App() {

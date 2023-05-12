@@ -12,7 +12,7 @@ const List = () => {
         <Navbar/>
         <Datatable/>
         <DatatableClientPro/>
-        
+        <DatatableClientPro />
       </div>
     </div>
   )
