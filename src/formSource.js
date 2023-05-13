@@ -20,11 +20,17 @@ export const userInputs = [
     {
       id: 4,
       label: "Phone",
-      type: "text",
+      type: "number",
       placeholder: "+1 234 567 89",
     },
     {
       id: 5,
+      label: "Daye of Birth",
+      type: "date",
+      placeholder: "+1 234 567 89",
+    },
+    {
+      id: 6,
       label: "Password",
       type: "password",
     },

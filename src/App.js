@@ -10,10 +10,12 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import ListShops from "./pages/list/ListShops";
 import ListOrders from "./pages/list/ListOrders"
+import {userproInputs} from './formsourcepro'
 
-
+import ListChains from "./pages/list/ListChains";
 import SingleShop from "./pages/single/SingleShop";
 import SingleClientPro from "./pages/single/SingleClientPro";
+import NewPro from "./pages/new/NewPro";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -30,6 +32,9 @@ function App() {
               <Route path=":userId" element={<Single />} />
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
+              </Route>
+              <Route path="pro">
+              <Route path="new" element={<NewPro inputs={userproInputs} title="Add New User" />} />
               </Route>
               
               <Route
@@ -58,6 +63,19 @@ function App() {
             <Route path="Orders">
               <Route index element={<ListOrders />} />
               <Route path="shop">
+              <Route path=":orderId" element={<SingleShop />} />
+              </Route>
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
+      
+
+              
+            </Route>
+            <Route path="chains">
+              <Route index element={<ListChains/>} />
+              <Route path="chain">
               <Route path=":orderId" element={<SingleShop />} />
               </Route>
               <Route

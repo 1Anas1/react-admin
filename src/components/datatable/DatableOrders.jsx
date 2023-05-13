@@ -36,7 +36,7 @@ const DatatableOrders = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-    Principal Users
+        Orders
         <Link to="/users/new" className="link">
           Add New Order
         </Link>

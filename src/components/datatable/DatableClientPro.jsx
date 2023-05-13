@@ -1,6 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesourceprincipal";
+import { userColumns, userRows } from "../../datatblesourcePro";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -37,8 +37,8 @@ const DatatableClientPro = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Professional Clients
-        <Link to="/users/new" className="link">
-          Add New Professionel Client
+        <Link to="/users/Pro/new" className="link">
+          Add New Client
         </Link>
       </div>
       <DataGrid

@@ -1,10 +1,10 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesourceprincipal";
+import { userColumns, userRows } from "../../datatablesourceChain";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Datatable = () => {
+const DatatableChains = () => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -15,7 +15,7 @@ const Datatable = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 170,
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -32,13 +32,15 @@ const Datatable = () => {
         );
       },
     },
+   
   ];
+  
   return (
     <div className="datatable">
       <div className="datatableTitle">
-    Principal Users
+        Chains
         <Link to="/users/new" className="link">
-          Add New Principal
+          Add New Chain
         </Link>
       </div>
       <DataGrid
@@ -53,4 +55,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default DatatableChains;

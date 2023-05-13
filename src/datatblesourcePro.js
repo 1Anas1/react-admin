@@ -31,9 +31,6 @@ export const userColumns = [
       width: 70,
     },
 
-
-  
-
     {
       field: "statusaccount",
       headerName: "Status account",
@@ -48,17 +45,12 @@ export const userColumns = [
     },
 
     {
-        field: "statusbracelet",
-        headerName: "Status bracelet",
-        width: 120,
-        renderCell: (params) => {
-          return (
-            <div className={`cellWithStatus ${params.row.statusbraclet}`}>
-              {params.row.statusbraclet}
-            </div>
-          );
-        },
+        field: "endcontract",
+        headerName: "End Contract",
+        width: 100,
       },
+
+   
   ];
   
   //temporary data
@@ -71,28 +63,7 @@ export const userColumns = [
       email: "1snow@gmail.com",
       age: 35,
       statusaccount  : "active",
-      statusbraclet :"active",
+      endcontract:"15/3/2023"
+      
     },
-    {
-      id: 2,
-      firstname: "Jamie",
-      lastname:"kik",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "2snow@gmail.com",
-      age: 42,
-      statusaccount  : "active",
-      statusbraclet :"active",
-    },
-    {
-      id: 3,
-      firstname: "Lannister",
-      lastname: "Lannister4",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "3snow@gmail.com",
-      age: 45,
-      statusaccount  : "active",
-      statusbraclet :"active",
-    },
-   
-   
   ];
