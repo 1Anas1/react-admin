@@ -11,12 +11,12 @@ import { DarkModeContext } from "./context/darkModeContext";
 import ListShops from "./pages/list/ListShops";
 import ListOrders from "./pages/list/ListOrders"
 import {userproInputs} from './formsourcepro'
-
+import SingleMember from "./pages/single/SingleMember";
 import ListChains from "./pages/list/ListChains";
 import SingleShop from "./pages/single/SingleShop";
 import SingleClientPro from "./pages/single/SingleClientPro";
 import NewPro from "./pages/new/NewPro";
-
+import Signin from "./pages/SignIn/Signin";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -26,10 +26,13 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Signin />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
+              <Route path="member">
+              <Route path=":userId" element={<SingleMember/>} />
+              </Route>
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
               </Route>
