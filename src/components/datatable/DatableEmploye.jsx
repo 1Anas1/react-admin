@@ -37,7 +37,7 @@ const DatatableEmploye= () => {
     <div className="datatable">
       <div className="datatableTitle">
         Emplyees
-        <Link to="/users/new" className="link">
+        <Link to="/products/newEmploye" className="link">
           Add New Employee
         </Link>
       </div>

@@ -16,7 +16,9 @@ import ListChains from "./pages/list/ListChains";
 import SingleShop from "./pages/single/SingleShop";
 import SingleClientPro from "./pages/single/SingleClientPro";
 import NewPro from "./pages/new/NewPro";
-import Signin from "./pages/SignIn/Signin";
+
+import NewEmploye from "./pages/new/NewEmploye";
+import {EmpInputs} from '../src/formsourceEmp';
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -26,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Home />} />
-            <Route path="login" element={<Signin />} />
+            <Route path="login" element={<Login />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
@@ -57,8 +59,8 @@ function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
               <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
+                path="newEmploye"
+                element={<NewEmploye inputs={EmpInputs} title="Add New Product" />}
               />
 
               

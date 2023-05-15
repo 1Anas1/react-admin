@@ -1,4 +1,4 @@
-export const userInputs = [
+export const EmpInputs = [
     {
       id: 1,
       label: "Firt name",
@@ -34,40 +34,16 @@ export const userInputs = [
       label: "Password",
       type: "password",
     },
-   
+    {
+      id: 7,
+      label: "Role",
+      type: "select",
+      options: [
+        { value: "manager", label: "Manager" },
+        { value: "cashier", label: "Cashier" },
+       
+      ],
+    },
     
   ];
  
-  export const productInputs = [
-    {
-      id: 1,
-      label: "Title",
-      type: "text",
-      placeholder: "Apple Macbook Pro",
-    },
-    {
-      id: 2,
-      label: "Description",
-      type: "text",
-      placeholder: "Description",
-    },
-    {
-      id: 3,
-      label: "Category",
-      type: "text",
-      placeholder: "Computers",
-    },
-    {
-      id: 4,
-      label: "Price",
-      type: "text",
-      placeholder: "100",
-    },
-    {
-      id: 5,
-      label: "Stock",
-      type: "text",
-      placeholder: "in stock",
-    },
-  ];
-  
