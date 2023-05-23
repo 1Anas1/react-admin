@@ -28,6 +28,9 @@ const DatatableClientPro = () => {
             >
               Delete
             </div>
+            <Link to='/users/pro/new' style={{textDecoration:"none"}}>
+            <div className="EditButton">Edit</div>
+            </Link>
           </div>
         );
       },

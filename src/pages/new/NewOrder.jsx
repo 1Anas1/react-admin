@@ -4,20 +4,10 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 
-const New = ({ inputs, title }) => {
+const NewOrder = ({ inputs, title }) => {
   const [file, setFile] = useState("");
 
- 
-  const [selectedOption, setSelectedOption] = useState("");
 
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-   
-  };
 
   return (
     <div className="new">
@@ -52,24 +42,11 @@ const New = ({ inputs, title }) => {
                 />
               </div>
 
-              {inputs.map((input) =>
-            input.type === "select" ? (
-              <div className="formInput" key={input.id} >
-                <label>{input.label}</label>
-                <select value={selectedOption} onChange={handleOptionChange}>
-                  
-                  {input.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <div className="formInput" key={input.id}>
-                <label>{input.label}</label>
-                <input type={input.type} placeholder={input.placeholder} />
-              </div>
+              {inputs.map((input) => (
+                <div className="formInput" key={input.id}>
+                  <label>{input.label}</label>
+                  <input type={input.type} placeholder={input.placeholder} />
+                </div>
               ))}
              
               <button>Create</button>
@@ -82,4 +59,4 @@ const New = ({ inputs, title }) => {
   );
 };
 
-export default New;
+export default NewOrder;

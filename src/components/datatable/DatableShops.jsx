@@ -28,6 +28,9 @@ const DatatableShops = () => {
             >
               Delete
             </div>
+            <Link to='/products/new' style={{textDecoration:"none"}}>
+            <div className="EditButton">Edit</div>
+            </Link>
           </div>
         );
       },

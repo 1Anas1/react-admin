@@ -20,7 +20,7 @@ export const userInputs = [
     {
       id: 4,
       label: "Phone",
-      type: "number",
+      type: "text",
       placeholder: "+1 234 567 89",
     },
     {
@@ -33,6 +33,32 @@ export const userInputs = [
       id: 6,
       label: "Password",
       type: "password",
+    },
+    {
+      id: 7,
+      label: "Gender",
+      type: "select",
+      options: [
+        { value: "male", label: "Male" },
+        { value: "female", label: "Female" },
+       
+      ],
+    },
+    {
+      id: 8,
+      label: "Status Bracelet",
+      type: "select",
+      options: [
+        { value: "active", label: "Active" },
+        { value: "inactive", label: "Inactive" },
+       
+      ],
+    },
+    {
+      id: 9,
+      label: "End contract",
+      type: "date",
+      
     },
    
     

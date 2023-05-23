@@ -15,7 +15,7 @@ const Datatable = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 170,
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -28,6 +28,9 @@ const Datatable = () => {
             >
               Delete
             </div>
+            <Link to='/users/new' style={{textDecoration:"none"}}>
+            <div className="EditButton">Edit</div>
+            </Link>
           </div>
         );
       },

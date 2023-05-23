@@ -28,6 +28,9 @@ const Datatablemember = () => {
             >
               Delete
             </div>
+            <Link to='/users/member/newemp' style={{textDecoration:"none"}}>
+            <div className="EditButton">Edit</div>
+            </Link>
           </div>
         );
       },

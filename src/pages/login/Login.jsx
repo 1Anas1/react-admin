@@ -1,48 +1,34 @@
 import "./login.scss"
-
-import React,{useState} from "react";
-
-
-
-
+import { Link } from "react-router-dom";
+import React,{useState} from 'react'
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Gérer la soumission du formulaire ici
-  };
-
+    
+        const [popupStyle,showPopup] = useState("hide")
+        const popup = ()=>{
+            showPopup("login-popup")
+            setTimeout(()=>showPopup("hide"),3000)
+        }
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-};
+    <div className="cover">
+        <h1>Sign in</h1>
+        <input type="text" placeholder="Email"/>
+        <input type="password" placeholder="password"/>
 
+        <Link to="/Home" style={{ textDecoration: "none" }}>
+    <div className="login-btn" onClick={popup}>Sign in</div>
+    </Link>
+    <div className={popupStyle}>
+
+        <h3>Login Failed</h3>
+        <p> Username or password incorrect</p>
+    </div>
+    </div>
+   
+)
+}
+
+  
 
 
 export default Login

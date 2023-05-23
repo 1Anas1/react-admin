@@ -28,6 +28,9 @@ const DatatableChains = () => {
             >
               Delete
             </div>
+            <Link to='/users/new' style={{textDecoration:"none"}}>
+            <div className="EditButton">Edit</div>
+            </Link>
           </div>
         );
       },

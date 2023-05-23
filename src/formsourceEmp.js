@@ -20,7 +20,7 @@ export const EmpInputs = [
     {
       id: 4,
       label: "Phone",
-      type: "number",
+      type: "text",
       placeholder: "+1 234 567 89",
     },
     {

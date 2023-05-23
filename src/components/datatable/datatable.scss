@@ -65,17 +65,49 @@
     .viewButton {
       padding: 2px 5px;
       border-radius: 5px;
-      color: darkblue;
+      color: white;
       border: 1px dotted rgba(0, 0, 139, 0.596);
       cursor: pointer;
+      background-color:#5555f7 ;
+      font-weight: 500;
     }
     
     .deleteButton {
       padding: 2px 5px;
       border-radius: 5px;
-      color: crimson;
+      color: white;
       border: 1px dotted rgba(220, 20, 60, 0.6);
       cursor: pointer;
+      background-color: #db143c;
+      font-weight: 500;
+    }
+    .EditButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: white;
+      border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+      background-color: #269c2b;
+      font-weight: 500;
     }
   }
+  .MuiDataGrid-root {
+  border: none;
+}
+
+.MuiDataGrid-cell {
+  border: none;
+}
+
+.MuiDataGrid-columnHeader {
+  border: none;
+}
+
+.MuiDataGrid-row {
+  border: none;
+}
+
+.MuiDataGrid-row.Mui-selected {
+  border: none;
+}
 }
