@@ -10,6 +10,7 @@ const Login = () => {
             setTimeout(()=>showPopup("hide"),3000)
         }
   return (
+    <div className="container">
     <div className="cover">
         <h1>Sign in</h1>
         <input type="text" placeholder="Email"/>
@@ -22,6 +23,7 @@ const Login = () => {
 
         <h3>Login Failed</h3>
         <p> Username or password incorrect</p>
+    </div>
     </div>
     </div>
    
