@@ -23,16 +23,24 @@ import {EmpInputs} from '../src/formsourceEmp';
 import SingleEmploye from "./pages/single/SingleEmploye";
 import NewOrder from "./pages/new/NewOrder";
 import NewChain from './pages/new/NewChain'
+import { shopinput } from "./formsourceshop";
+import { orderinput } from "./formsourceorder";
+import { chaininput } from "./formsourcechain";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-
+  const token = localStorage.getItem("accessToken");
+  const role =localStorage.getItem('role');
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Login />} />
-            <Route path="Home" element={<Home />} />
+            {!token && <Route index element={<Login />} />}
+            {token && <Route index element={<Home />} />}
+            {role === "admin" && (
+            <>
+            
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
@@ -61,7 +69,7 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewShop inputs={productInputs} title="Add New Product" />}
+                element={<NewShop inputs={shopinput} title="Add New Product" />}
               />
               <Route
                 path="newEmploye"
@@ -82,7 +90,7 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewOrder inputs={productInputs} title="Add New Product" />}
+                element={<NewOrder inputs={orderinput} title="Add New Product" />}
               />
       
 
@@ -95,12 +103,38 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewChain inputs={productInputs} title="Add New Product" />}
+                element={<NewChain inputs={chaininput} title="Add New Product" />}
               />
-      
+                  
+            </Route>
+            </>
+          )}
+            {role === "professional" && (
+            <>
+              <Route path="Home" element={<Home />} />
+              <Route path="products">
+              <Route index element={<ListShops />} />
+              <Route path="shop">
+              <Route path=":productId" element={<SingleShop />} />
+              </Route>
+              <Route
+                path="new"
+                element={<NewShop inputs={shopinput} title="Add New Product" />}
+              />
+              <Route
+                path="newEmploye"
+                element={<NewEmploye inputs={EmpInputs} title="Add New Product" />}
+              />
+              <Route
+                path="singlemp"
+                element={<SingleEmploye/>}
+              />
+
 
               
             </Route>
+            </>
+          )}
           </Route>
         </Routes>
       </BrowserRouter>

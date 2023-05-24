@@ -19,7 +19,7 @@ const DatatableClientPro = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/pro/test" style={{ textDecoration: "none" }}>
+            <Link to="/users/pro/view" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -40,7 +40,7 @@ const DatatableClientPro = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Professional Clients
-        <Link to="/users/Pro/new" className="link">
+        <Link to="/users/pro/new" className="link">
           Add New Client
         </Link>
       </div>

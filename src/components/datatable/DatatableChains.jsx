@@ -18,8 +18,9 @@ const DatatableChains = () => {
       width: 180,
       renderCell: (params) => {
         return (
+          
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link to="/products" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -42,7 +43,7 @@ const DatatableChains = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Chains
-        <Link to="/users/new" className="link">
+        <Link to="/chains/new" className="link">
           Add New Chain
         </Link>
       </div>

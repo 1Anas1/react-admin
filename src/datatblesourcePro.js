@@ -25,11 +25,7 @@ export const userColumns = [
       width: 230,
     },
   
-    {
-      field: "age",
-      headerName: "Age",
-      width: 70,
-    },
+   
 
     {
       field: "statusaccount",
@@ -61,7 +57,6 @@ export const userColumns = [
       lastname:"loli",
       img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
       email: "1snow@gmail.com",
-      age: 35,
       statusaccount  : "active",
       endcontract:"15/3/2023"
       

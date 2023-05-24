@@ -6,6 +6,16 @@ import { useState } from "react";
 
 const NewChain = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   
+  };
 
 
 
@@ -42,11 +52,24 @@ const NewChain = ({ inputs, title }) => {
                 />
               </div>
 
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
-                </div>
+              {inputs.map((input) =>
+            input.type === "select" ? (
+              <div className="formInput" key={input.id}>
+                <label>{input.label}</label>
+                <select value={selectedOption} onChange={handleOptionChange}>
+                 
+                  {input.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div className="formInput" key={input.id}>
+                <label>{input.label}</label>
+                <input type={input.type} placeholder={input.placeholder} />
+              </div>
               ))}
              
               <button>Create</button>

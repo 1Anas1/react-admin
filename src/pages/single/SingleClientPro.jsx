@@ -12,7 +12,7 @@ const SingleClientPro = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Edit</div>
+       
             <h1 className="title">Information</h1>
             <div className="item">
               <img
@@ -38,10 +38,6 @@ const SingleClientPro = () => {
           <div className="right">
             <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
           </div>
-        </div>
-        <div className="bottom">
-        <h1 className="title"></h1>
-          <DatatableClientPro/>
         </div>
        
       </div>

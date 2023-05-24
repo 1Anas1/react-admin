@@ -56,6 +56,16 @@ export const userInputs = [
     },
     {
       id: 9,
+      label: "Status account",
+      type: "select",
+      options: [
+        { value: "active", label: "Active" },
+        { value: "inactive", label: "Inactive" },
+       
+      ],
+    },
+    {
+      id: 10,
       label: "End contract",
       type: "date",
       

@@ -56,7 +56,7 @@ const NewEmploye = ({ inputs, title }) => {
               <div className="formInput" key={input.id}>
                 <label>{input.label}</label>
                 <select value={selectedOption} onChange={handleOptionChange}>
-                  <option value="">Choose role</option>
+                 
                   {input.options.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}

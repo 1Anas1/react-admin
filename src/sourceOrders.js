@@ -1,101 +1,54 @@
 export const userColumns = [
     { field: "id", headerName: "ID", width: 70 },
     {
-      field: "nameshop",
-      headerName: "Name Shop",
+      field: "username",
+      headerName: "User name",
       width: 150,
       
     },
     {
-        field: "owner",
-        headerName: "Owner",
+        field: "typeuser",
+        headerName: "Type User",
         width: 100,
       },
     {
-      field: "email",
-      headerName: "Email",
-      width: 200,
-    },
-    {
-      field: "phone",
-      headerName: "phone",
-      width: 100,
-    },
-    {
-        field: "location",
-        headerName: "location",
-        width: 100,
-      },
-      {
-        field: "remise",
-        headerName: "remise",
-        width: 80,
-      },
-      
-      {
-        field: "entryfee",
-        headerName: "entryfee",
-        width: 80,
-      },
-    {
-      field: "status",
-      headerName: "Status",
+      field: "typebracelet",
+      headerName: "Type Bracelet",
       width: 110,
-      renderCell: (params) => {
-        return (
-          <div className={`cellWithStatus ${params.row.status}`}>
-            {params.row.status}
-          </div>
-        );
-      },
     },
+    {
+      field: "colorbracelet",
+      headerName: "Color Bracelet",
+      width: 130,
+    },
+    
   ];
   
   //temporary data
   export const userRows = [
     {
       id: 1,
-      nameshop: "Snow",
-      owner:"eya",
-      status: "active",
-      email: "1snow@gmail.com",
-      remise:20,
-      entryfee:20,
-      location:'menzah',
-      phone:'93765544'
+      username: "Eya Belkadhi",
+      typeuser: "Principal",
+      typebracelet: "Type 1",
+      colorbracelet:"Red"
+      
     },
     {
       id: 2,
-      nameshop: "Snow",
-      owner:"eya",
-      status: "active",
-      email: "1snow@gmail.com",
-      remise:20,
-      entryfee:20,
-      location:'menzah',
-      phone:'93765544'
+      username: "Eya Belkadhi",
+      typeuser: "Principal",
+      typebracelet: "Type 1",
+      colorbracelet:"Red"
+      
     },
     {
       id: 3,
-      nameshop: "Snow",
-      owner:"eya",
-      status: "active",
-      email: "1snow@gmail.com",
-      remise:20,
-      entryfee:20,
-      location:'menzah',
-      phone:'93765544'
-    },
-    {
-      id: 4,
-      nameshop: "Snow",
-      owner:"eya",
-      status: "active",
-      email: "1snow@gmail.com",
-      remise:20,
-      entryfee:20,
-      location:'menzah',
-      phone:'93765544'
+      username: "Eya Belkadhi",
+      typeuser: "Principal",
+      typebracelet: "Type 1",
+      colorbracelet:"Red"
+      
     },
     
   ];

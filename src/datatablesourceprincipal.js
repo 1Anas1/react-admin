@@ -64,8 +64,7 @@ export const userColumns = [
       lastname:"loli",
       img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
       email: "1snow@gmail.com",
-      age: 35,
-      statusaccount  : "active",
+      statusaccount  : "inactive",
       statusbraclet :"active",
     },
     {
@@ -74,7 +73,7 @@ export const userColumns = [
       lastname:"kik",
       img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
       email: "2snow@gmail.com",
-      age: 42,
+    
       statusaccount  : "active",
       statusbraclet :"active",
     },
@@ -84,7 +83,6 @@ export const userColumns = [
       lastname: "Lannister4",
       img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
       email: "3snow@gmail.com",
-      age: 45,
       statusaccount  : "active",
       statusbraclet :"active",
     },

@@ -40,7 +40,7 @@ const DatatableShops = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Shops
-        <Link to="/users/new" className="link">
+        <Link to="/products/new" className="link">
           Add New Shop
         </Link>
       </div>

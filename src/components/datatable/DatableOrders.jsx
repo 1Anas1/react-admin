@@ -19,16 +19,14 @@ const DatatableOrders = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+          
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
               Delete
             </div>
-            <Link to='/products/new' style={{textDecoration:"none"}}>
+            <Link to='/Orders/new' style={{textDecoration:"none"}}>
             <div className="EditButton">Edit</div>
             </Link>
           </div>
@@ -40,7 +38,7 @@ const DatatableOrders = () => {
     <div className="datatable">
       <div className="datatableTitle">
         Orders
-        <Link to="/users/new" className="link">
+        <Link to="/Orders/new" className="link">
           Add New Order
         </Link>
       </div>
