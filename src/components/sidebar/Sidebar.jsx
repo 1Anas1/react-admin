@@ -17,6 +17,8 @@ import { useContext } from "react";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+   const token = localStorage.getItem("accessToken");
+  const role =localStorage.getItem('role');
   const navigate=useNavigate();
   const handleLogout = () => {
     // Clear the access token and role from local storage
@@ -44,36 +46,56 @@ const Sidebar = () => {
             <span>Dashboard</span>
           </li>
           <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
-            <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Users</span>
-            </li>
-          </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Shops</span>
-            </li>
-          </Link >
-          <Link to="/Orders"style={{ textDecoration: "none" }}>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
-           </Link>
-           <Link to="/chains" style={{ textDecoration: "none" }}>
-           <li>
-            <LocalShippingIcon className="icon" />
-            <span>Chains</span>
-          </li>
-           </Link>
-          <p className="title">USEFUL</p>
+          {role === "admin" && (
+  <>
+    <Link to="/users" style={{ textDecoration: "none" }}>
+      <li>
+        <PersonOutlineIcon className="icon" />
+        <span>Users</span>
+      </li>
+    </Link>
+    <Link to="/products" style={{ textDecoration: "none" }}>
+      <li>
+        <StoreIcon className="icon" />
+        <span>Shops</span>
+      </li>
+    </Link>
+    <Link to="/Orders" style={{ textDecoration: "none" }}>
+      <li>
+        <CreditCardIcon className="icon" />
+        <span>Orders</span>
+      </li>
+    </Link>
+    <Link to="/chains" style={{ textDecoration: "none" }}>
+      <li>
+        <LocalShippingIcon className="icon" />
+        <span>Chains</span>
+      </li>
+    </Link>
+  </>
+)}
+{role === "professional" && (
+  <>
+  <Link to="/products" style={{ textDecoration: "none" }}>
+    <li>
+      <StoreIcon className="icon" />
+      <span>Shops</span>
+    </li>
+  </Link>
+   <Link to="/chains" style={{ textDecoration: "none" }}>
+   <li>
+     <LocalShippingIcon className="icon" />
+     <span>Chains</span>
+   </li>
+ </Link>
+ </>
+)}
+          
          
           
           
           <p className="title">USER</p>
-          <Link to="/login" style={{ textDecoration: "none" }}>
+          <Link to="/Profil" style={{ textDecoration: "none" }}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>

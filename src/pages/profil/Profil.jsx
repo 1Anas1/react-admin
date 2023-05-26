@@ -1,13 +1,13 @@
-import "./new.scss";
+import "./profil.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-import LocationInput from "../../components/LocationInpout/LocatilonInpout";
 
-const NewShop = ({ inputs, title }) => {
+const Profil = ({ inputs, title }) => {
   const [file, setFile] = useState("");
 
+ 
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (e) => {
@@ -18,7 +18,6 @@ const NewShop = ({ inputs, title }) => {
     e.preventDefault();
    
   };
-   
 
   return (
     <div className="new">
@@ -52,7 +51,6 @@ const NewShop = ({ inputs, title }) => {
                   style={{ display: "none" }}
                 />
               </div>
-             
 
               {inputs.map((input) =>
             input.type === "select" ? (
@@ -73,17 +71,15 @@ const NewShop = ({ inputs, title }) => {
                 <input type={input.type} placeholder={input.placeholder} />
               </div>
               ))}
-              <div>
-             <LocationInput /></div>
+             
               <button>Create</button>
               
             </form>
           </div>
-         
         </div>
       </div>
     </div>
   );
 };
 
-export default NewShop;
+export default Profil;

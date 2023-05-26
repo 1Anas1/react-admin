@@ -45,10 +45,10 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "Member":
       data = {
-        title: "EARNINGS",
-        isMoney: true,
+        title: "MEMBERS",
+        isMoney: false,
         link: "View net earnings",
         icon: (
           <MonetizationOnOutlinedIcon
@@ -58,10 +58,10 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "balance":
+    case "professional client":
       data = {
-        title: "BALANCE",
-        isMoney: true,
+        title: "PROFESSIONAL CLIENT",
+        isMoney: false,
         link: "See details",
         icon: (
           <AccountBalanceWalletOutlinedIcon
@@ -74,6 +74,22 @@ const Widget = ({ type }) => {
         ),
       };
       break;
+      case "payment":
+        data = {
+          title: "PAYMENT",
+          isMoney: false,
+          link: "See details",
+          icon: (
+            <AccountBalanceWalletOutlinedIcon
+              className="icon"
+              style={{
+                backgroundColor: "rgba(128, 0, 128, 0.2)",
+                color: "purple",
+              }}
+            />
+          ),
+        };
+        break;
     default:
       break;
   }

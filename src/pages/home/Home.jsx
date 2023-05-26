@@ -7,20 +7,34 @@ import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
 
 const Home = () => {
+  const token = localStorage.getItem("accessToken");
+  const role = localStorage.getItem('role');
+  const isAdmin = role === 'admin';
+  const isProfessional = role === 'professional';
+
   return (
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+          {isAdmin && (
+            <>
+              <Widget type="user" />
+              <Widget type="order" />
+              <Widget type="Member" />
+              <Widget type="professional client" />
+            </>
+          )}
+          {isProfessional && ( 
+               <>
+            <Widget type="user" />
+            <Widget type="payment" /></>
+          )}
         </div>
         <div className="charts">
           <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+          {/* Ajoutez d'autres composants de chart si nécessaire */}
         </div>
         <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
@@ -30,5 +44,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;

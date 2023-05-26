@@ -26,6 +26,7 @@ import NewChain from './pages/new/NewChain'
 import { shopinput } from "./formsourceshop";
 import { orderinput } from "./formsourceorder";
 import { chaininput } from "./formsourcechain";
+import Profil from "./pages/profil/Profil";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -107,6 +108,9 @@ function App() {
               />
                   
             </Route>
+            <Route path="Profil">
+              <Route index element={<Profil inputs={chaininput} title="Add New Product"/>} />
+              </Route>
             </>
           )}
             {role === "professional" && (
@@ -133,6 +137,22 @@ function App() {
 
               
             </Route>
+            <Route path="Profil">
+              <Route index element={<Profil inputs={chaininput} title="Add New Product"/>} />
+              </Route>
+
+              <Route path="chains">
+              <Route index element={<ListChains/>} />
+              <Route path="chain">
+              <Route path=":orderId" element={<SingleShop />} />
+              </Route>
+              <Route
+                path="new"
+                element={<NewChain inputs={chaininput} title="Add New Product" />}
+              />
+                  
+            </Route>
+            
             </>
           )}
           </Route>
