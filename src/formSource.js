@@ -25,7 +25,7 @@ export const userInputs = [
     },
     {
       id: 5,
-      label: "Daye of Birth",
+      label: "Date of Birth",
       type: "date",
       placeholder: "+1 234 567 89",
     },

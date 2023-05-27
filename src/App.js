@@ -27,7 +27,7 @@ import { shopinput } from "./formsourceshop";
 import { orderinput } from "./formsourceorder";
 import { chaininput } from "./formsourcechain";
 import Profil from "./pages/profil/Profil";
-
+import EditUser from './pages/EditUser/EditUser'
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const token = localStorage.getItem("accessToken");
@@ -109,7 +109,7 @@ function App() {
                   
             </Route>
             <Route path="Profil">
-              <Route index element={<Profil inputs={chaininput} title="Add New Product"/>} />
+              <Route index element={<EditUser/>}/>
               </Route>
             </>
           )}
