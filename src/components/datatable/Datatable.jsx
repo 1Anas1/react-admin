@@ -6,7 +6,7 @@ import { useState,useEffect } from "react";
 
 const Datatable = ({member}) => {
   const [data, setData] = useState(userRows);
-  console.log(member)
+  console.log(member,data)
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
@@ -46,7 +46,7 @@ const Datatable = ({member}) => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={member}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

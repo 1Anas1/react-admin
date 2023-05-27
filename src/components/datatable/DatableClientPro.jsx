@@ -4,7 +4,7 @@ import { userColumns, userRows } from "../../datatblesourcePro";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const DatatableClientPro = () => {
+const DatatableClientPro = ({pro}) => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -46,7 +46,7 @@ const DatatableClientPro = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={pro}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
