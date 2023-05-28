@@ -45,6 +45,9 @@ function App() {
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
+              <Route path="edit/:userId">
+              <Route index element={<EditUser/>}/>
+              </Route>
               <Route path="member">
               <Route path=":userId" element={<SingleMember/>} />
               <Route path="newemp" element={<NewMember inputs={userproInputs} title="Add New User" />}/>

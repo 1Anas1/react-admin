@@ -8,7 +8,7 @@ const Datatable = ({member}) => {
   const [data, setData] = useState(userRows);
   console.log(member,data)
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    setData(member.filter((item) => item.id !== id));
   };
 
   const actionColumn = [
@@ -17,9 +17,10 @@ const Datatable = ({member}) => {
       headerName: "Action",
       width: 200,
       renderCell: (params) => {
+        console.log(params)
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link to={`/users/${params.row.idUser}`}  style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -28,7 +29,7 @@ const Datatable = ({member}) => {
             >
               Delete
             </div>
-            <Link to='/users/new' style={{textDecoration:"none"}}>
+            <Link to={`/users/edit/${params.row.idUser}`} style={{textDecoration:"none"}}>
             <div className="EditButton">Edit</div>
             </Link>
           </div>

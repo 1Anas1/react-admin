@@ -3,8 +3,42 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
-
+import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "../../api/axios";
 const SingleMember = () => {
+  const [loading, setLoading] = useState(true);
+  const [user,setUser]=useState({});
+  const [operation,setOperation]=useState([]);
+  const token = localStorage.getItem("accessToken");
+  const { userId } = useParams();
+  const url = process.env.REACT_APP_URL;
+  useEffect(() => {
+    console.log(userId);
+    async function fetchData() {
+      try {
+        const response = await axios.post("/getUserInfo",{idUser:userId}, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data.user);
+        setUser(response?.data.user);
+        setOperation(response?.data.user.bracelets[0].operations)
+        
+        
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+
+    fetchData();
+  }, [token, userId]);
   return (
     <div className="single">
       <Sidebar />
@@ -15,16 +49,24 @@ const SingleMember = () => {
             <div className="editButton">Edit</div>
             <h1 className="title">Information</h1>
             <div className="item">
+            {user.image ? (
+              <img
+                src={url + "/uploads/" + user.image}
+                alt=""
+                className="itemImg"  // Add the class name here
+              />
+            ) : (
               <img
                 src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
                 alt=""
-                className="itemImg"
+                className="itemImg"  // Add the class name here
               />
+            )}
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{user.lastName} {user.firstName}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemValue">{user.Email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
@@ -42,7 +84,7 @@ const SingleMember = () => {
        
         <div className="bottom">
         <h1 className="title">Last Transactions</h1>
-          <List/>
+          <List mapUser={operation}/>
         </div>
       </div>
     </div>
