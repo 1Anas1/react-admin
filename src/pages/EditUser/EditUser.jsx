@@ -19,7 +19,7 @@ import {
                 <Navbar/>
      
                 <div className="userTitleContainer">
-        <h1 className="userTitle">Edit profile</h1>
+        <h1 className="userTitle">Profile</h1>
         
       </div>
         <div className="userContainer">
@@ -40,7 +40,7 @@ import {
               <span className="userShowTitle">Account Details</span>
               <div className="userShowInfo">
                 <PermIdentity className="userShowIcon" />
-                <span className="userShowInfoTitle">cherni.a</span>
+                <span className="userShowInfoTitle">cherni.as</span>
               </div>
               <div className="userShowInfo">
                 <CalendarToday className="userShowIcon" />
@@ -53,7 +53,7 @@ import {
               </div>
               <div className="userShowInfo">
                 <MailOutline className="userShowIcon" />
-                <span className="userShowInfoTitle">cherni.anas@gmail.com</span>
+                <span className="userShowInfoTitle">annabeck99@gmail.com</span>
               </div>
               <div className="userShowInfo">
                 <LocationSearching className="userShowIcon" />

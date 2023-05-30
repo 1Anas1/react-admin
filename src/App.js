@@ -141,7 +141,7 @@ function App() {
               
             </Route>
             <Route path="Profil">
-              <Route index element={<Profil inputs={chaininput} title="Add New Product"/>} />
+              <Route index element={<EditUser/>} />
               </Route>
 
               <Route path="chains">

@@ -4,7 +4,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 const Widget = ({ type }) => {
   let data;
 
@@ -17,7 +17,7 @@ const Widget = ({ type }) => {
       data = {
         title: "USERS",
         isMoney: false,
-        link: "See all users",
+        link: "View all users",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -49,9 +49,9 @@ const Widget = ({ type }) => {
       data = {
         title: "MEMBERS",
         isMoney: false,
-        link: "View net earnings",
+        link: "View all members",
         icon: (
-          <MonetizationOnOutlinedIcon
+          <PersonOutlinedIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />
@@ -62,9 +62,9 @@ const Widget = ({ type }) => {
       data = {
         title: "PROFESSIONAL CLIENT",
         isMoney: false,
-        link: "See details",
+        link: "View all professional client",
         icon: (
-          <AccountBalanceWalletOutlinedIcon
+          <PersonOutlinedIcon
             className="icon"
             style={{
               backgroundColor: "rgba(128, 0, 128, 0.2)",
@@ -80,7 +80,7 @@ const Widget = ({ type }) => {
           isMoney: false,
           link: "See details",
           icon: (
-            <AccountBalanceWalletOutlinedIcon
+            <MonetizationOnOutlinedIcon
               className="icon"
               style={{
                 backgroundColor: "rgba(128, 0, 128, 0.2)",

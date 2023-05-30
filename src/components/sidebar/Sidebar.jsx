@@ -14,7 +14,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Link ,useNavigate} from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
-
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
    const token = localStorage.getItem("accessToken");
@@ -33,7 +33,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/Home" style={{ textDecoration: "none",display:'flex',alignItems:'center',justifyContent:'center' }}>
+        <Link to="/" style={{ textDecoration: "none",display:'flex',alignItems:'center',justifyContent:'center' }}>
         <img src={process.env.PUBLIC_URL+'logoo.png'} width='150px' alt="cashless" />
         </Link>
       </div>
@@ -68,7 +68,7 @@ const Sidebar = () => {
     </Link>
     <Link to="/chains" style={{ textDecoration: "none" }}>
       <li>
-        <LocalShippingIcon className="icon" />
+        <DomainAddIcon className="icon" />
         <span>Chains</span>
       </li>
     </Link>
@@ -107,16 +107,7 @@ const Sidebar = () => {
     </li>
         </ul>
       </div>
-      <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
-      </div>
+     
     </div>
   );
 };
