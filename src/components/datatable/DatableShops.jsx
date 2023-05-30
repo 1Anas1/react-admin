@@ -45,7 +45,7 @@ useEffect(() => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`products/shop/${params.row.idUser}`}style={{ textDecoration: "none" }}>
+            <Link to={`/products/shop/${params.row.idUser}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             {isAdmin && ( // Show "Delete" and "Edit" buttons only for the admin
