@@ -45,18 +45,18 @@ useEffect(() => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`products/shop/${params.row.idUser}`}style={{ textDecoration: "none" }}>
+            <Link to={`/products/shop/${params.row.idUser}`}style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             {isAdmin && ( // Show "Delete" and "Edit" buttons only for the admin
               <>
                 <div
                   className="deleteButton"
-                  onClick={() => handleDelete(params.row.id)}
+                  onClick={() => handleDelete(params.row.idUser)}
                 >
                   Delete
                 </div>
-                <Link to="/products/new" style={{ textDecoration: "none" }}>
+                <Link to={`/products/new/${params.row.idUser}`} style={{ textDecoration: "none" }}>
                   <div className="EditButton">Edit</div>
                 </Link>
               </>
