@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
 import { useParams } from 'react-router-dom';
 const LOGIN_URL = "/api/professional/getSellingPointsByChainId";
-
+const URL="/api/professional/getSellingPoints";
 const ListShops = () => {
   const { chainId } = useParams();
   const [data, setData] = useState([{
@@ -30,6 +30,27 @@ const ListShops = () => {
     async function fetchData() {
       try {
         const response = await axios.get(`${LOGIN_URL}/${chainId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data)
+        setData(response?.data);
+        
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+
+    fetchData();}
+    else {  async function fetchData() {
+      try {
+        const response = await axios.get(URL,{
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
