@@ -68,6 +68,10 @@ function App() {
             </Route>
             <Route path="products">
               <Route index element={<ListShops />} />
+              <Route path="chain">
+
+                <Route path=":chainId" element={<ListShops />} />
+              </Route>
               <Route path="shop">
               <Route path=":productId" element={<SingleShop />} />
               </Route>

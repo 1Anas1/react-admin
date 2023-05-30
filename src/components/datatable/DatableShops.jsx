@@ -2,13 +2,36 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../sourceShops";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
-const DatatableShops = () => {
+import { useState,useEffect } from "react";
+const url = process.env.REACT_APP_URL;
+const DatatableShops = ({shop}) => {
   const [data, setData] = useState(userRows);
   const token = localStorage.getItem("accessToken");
   const role = localStorage.getItem('role');
   const isAdmin = role === 'admin';
+  const [result, setResult] = useState();
+useEffect(() => {
+  if (shop) {
+   let id=1;
+   const updatedData = shop.map((item) => {
+    return {
+      isUser:item._id,
+      id: id++,
+      nameshop: item.sp_name,
+      owner:"eya",
+      status: "active",
+      email: item.sp_email,
+      remise:20,
+      entryfee:20,
+      location:item.sp_address,
+      phone:item.sp_phone
+    };
+  })
+  console.log(updatedData);
+    setResult(updatedData);
+    console.log("Component rendered with updated mapUser prop");
+  }
+}, [shop]);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -54,14 +77,16 @@ const DatatableShops = () => {
           </Link>
         )}
       </div>
+     {result && (
       <DataGrid
-        className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-      />
+      className="datagrid"
+      rows={result}
+      columns={userColumns.concat(actionColumn)}
+      pageSize={9}
+      rowsPerPageOptions={[9]}
+      checkboxSelection
+    />
+     )} 
     </div>
   );
 };
