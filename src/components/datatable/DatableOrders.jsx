@@ -6,7 +6,25 @@ import { useState } from "react";
 
 const DatatableOrders = () => {
   const [data, setData] = useState(userRows);
-
+  const [result, setResult] = useState();
+  useEffect(() => {
+    if (order) {
+     let id=1;
+     const updatedData = order.map((item) => {
+      return {
+        idUser:item._id,
+        id: id++,
+        username:item.user.firstName+" "+item.lastName,
+        typeuser:item.user.role.name,
+        typebracelet:item.type,
+        colorbracelet:item.color,
+      };
+    })
+    console.log(updatedData);
+      setResult(updatedData);
+      console.log("Component rendered with updated mapUser prop");
+    }
+  }, [order]);
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
