@@ -15,7 +15,7 @@ useEffect(() => {
    let id=1;
    const updatedData = shop.map((item) => {
     return {
-      isUser:item._id,
+      idUser:item._id,
       id: id++,
       nameshop: item.sp_name,
       owner:"eya",
@@ -45,7 +45,7 @@ useEffect(() => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/products/shop/test" style={{ textDecoration: "none" }}>
+            <Link to={`products/shop/${params.row.idUser}`}style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             {isAdmin && ( // Show "Delete" and "Edit" buttons only for the admin
