@@ -61,7 +61,7 @@ function App() {
               
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={<New  title="Add New User" />}
               />
               
              
@@ -98,7 +98,7 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewOrder inputs={orderinput} title="Add New Product" />}
+                element={<NewOrder title="Add New Product" />}
               />
       
 
@@ -130,7 +130,7 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewShop inputs={shopinput} title="Add New Product" />}
+                element={<NewShop title="Add New Product" />}
               />
               <Route
                 path="newEmploye"

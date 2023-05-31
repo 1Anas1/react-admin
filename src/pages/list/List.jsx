@@ -39,7 +39,8 @@ const List = () => {
           },
           withCredentials: false,
         });
-
+        let mem=response?.data.member;
+        
         setData(response?.data.member);
         setDatapro(response?.data.professional)
         setLoading(false);
