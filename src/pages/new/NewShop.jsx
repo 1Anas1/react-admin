@@ -3,7 +3,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import LocationInput from "../../components/LocationInpout/LocatilonInpout";
 import axios from "../../api/axios";
+import { useHistory } from "react-router-dom";
 const NewShop = ({ title }) => {
+  const history = useHistory();
   const [formInputs, setFormInputs] = useState({
     name_shop: "",
     email: "",
@@ -30,7 +32,7 @@ const NewShop = ({ title }) => {
     };
     const getChains = async () => {
       try {
-        const response = await axios.get('/chains'); // Update with your chains endpoint
+        const response = await axios.get('/api/professional/getChains'); // Update with your chains endpoint
         const options = response.data.map(chain => ({ value: chain._id, label: chain.chain_name }));
         setChainOptions(options);
       } catch (error) {
@@ -42,6 +44,7 @@ const NewShop = ({ title }) => {
 
     getProfessionalUsers();
   }, []);
+  const token = localStorage.getItem("accessToken");
   const inputs = [
     
         
@@ -128,7 +131,7 @@ chainInput.options = chainOptions;
     setFormInputs({ ...formInputs, [label]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const {
@@ -136,25 +139,22 @@ chainInput.options = chainOptions;
       email,
       phone_number,
       location,
-      remise,
-      entryfee,
       status_shop,
       owner,
-      chain, // Include chain here
       position,
+      chain,
     } = formInputs;
 
-    // You should include chain in the required fields check
     if (
       !name_shop ||
       !email ||
       !phone_number ||
       !location ||
-      !remise ||
-      !entryfee ||
       !status_shop ||
       !owner ||
-      !chain // Check if chain is selected
+      !position.lat ||
+      !position.lng ||
+      !chain
     ) {
       alert("All fields must be filled out");
       return;
@@ -166,14 +166,36 @@ chainInput.options = chainOptions;
       return;
     }
 
-    if (!position.lat || !position.lng) {
-      alert("Position must be set");
-      return;
-    }
+    // Here, you may need to replace 'accessToken' with the actual variable name where your access token is stored.
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
 
-    // Submit form
-    console.log("Form submitted", formInputs);
+    try {
+      const response = await axios.post(
+        "/api/professional/selling-point",
+        {
+          name_shop,
+          email,
+          phone_number,
+          location,
+          status_shop,
+          owner,
+          position,
+          chain,
+        },
+        config
+      );
+      if (response.status === 201) {
+        console.log("Response from server: ", response.data);
+        history.push("/"); // assuming "/" is your home route
+      }
+      
+    } catch (error) {
+      console.error("Failed to submit form", error);
+    }
   };
+
 
   return (
     <div className="new">
