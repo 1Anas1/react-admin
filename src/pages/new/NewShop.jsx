@@ -13,9 +13,11 @@ const NewShop = ({ title }) => {
     entryfee: "",
     status_shop: "",
     owner: "",
+    chain: "", // Add chain here
     position: { lat: null, lng: null },
   });
   const [ownerOptions, setOwnerOptions] = useState([]);
+  const [chainOptions, setChainOptions] = useState([]);
   useEffect(() => {
     const getProfessionalUsers = async () => {
       try {
@@ -26,6 +28,17 @@ const NewShop = ({ title }) => {
         console.error('Failed to fetch professional users', error);
       }
     };
+    const getChains = async () => {
+      try {
+        const response = await axios.get('/chains'); // Update with your chains endpoint
+        const options = response.data.map(chain => ({ value: chain._id, label: chain.chain_name }));
+        setChainOptions(options);
+      } catch (error) {
+        console.error('Failed to fetch chains', error);
+      }
+    };
+  
+    getChains();
 
     getProfessionalUsers();
   }, []);
@@ -87,14 +100,20 @@ const NewShop = ({ title }) => {
     label: "owner",
     type: "select",
     options: [
-      { value: "active", label: "test@gmail.com" },
-      { value: "inactive", label: "teeest@gmail.com" },
      
     ],
+  },
+  {
+    id: 9, // Make sure this ID is unique
+    label: "chain",
+    type: "select",
+    options: [], // This will be populated in the render below
   },
   ];
   const ownerInput = inputs.find(input => input.label === 'owner');
   ownerInput.options = ownerOptions;
+  const chainInput = inputs.find(input => input.label === 'chain');
+chainInput.options = chainOptions;
 
   const psoi = (pos) => {
     console.log("lata", pos);
@@ -121,9 +140,11 @@ const NewShop = ({ title }) => {
       entryfee,
       status_shop,
       owner,
+      chain, // Include chain here
       position,
     } = formInputs;
-    console.log(formInputs)
+
+    // You should include chain in the required fields check
     if (
       !name_shop ||
       !email ||
@@ -132,7 +153,8 @@ const NewShop = ({ title }) => {
       !remise ||
       !entryfee ||
       !status_shop ||
-      !owner
+      !owner ||
+      !chain // Check if chain is selected
     ) {
       alert("All fields must be filled out");
       return;

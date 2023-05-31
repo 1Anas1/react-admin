@@ -69,7 +69,7 @@ const ListShops = () => {
     }
 
     fetchData();}
-  }, [token]);
+  }, [chainId, data, token]);
   return (
     <div className="list">
       <Sidebar/>
