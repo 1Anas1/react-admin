@@ -32,10 +32,10 @@ const Home = () => {
             <Widget type="payment" /></>
           )}
         </div>
-        <div className="charts">
+       { /*<div className="charts">
           <Featured />
           {/* Ajoutez d'autres composants de chart si nécessaire */}
-        </div>
+       {/*  </div>*/}
         <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
           <Table />

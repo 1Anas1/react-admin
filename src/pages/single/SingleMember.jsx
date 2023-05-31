@@ -46,7 +46,7 @@ const SingleMember = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Edit</div>
+           
             <h1 className="title">Information</h1>
             <div className="item">
             {user.image ? (
