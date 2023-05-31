@@ -6,12 +6,50 @@ import {
     PhoneAndroid,
     Publish,
   } from "@material-ui/icons";
+  import React, { useState, useEffect } from "react";
   import { Link } from "react-router-dom";
   import "./EditUser.scss";
+  import axios from "../../api/axios";
   import Navbar from "../../components/navbar/Navbar";
   import Sidebar from "../../components/sidebar/Sidebar";
-  
+  import { useParams } from 'react-router-dom';
   export default function User() {
+    const LOGIN_URL = "/api/professional/getChainById";
+    const { chainId } = useParams();
+  const [data, setData] = useState([{
+          
+    idUser:"",
+    id: "",
+    chainname: "",
+    img: "",
+    owner: "",
+}]);
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  
+      console.log(chainId);
+    async function fetchData() {
+      try {
+        const response = await axios.get(`${LOGIN_URL}/${chainId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+           
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data)
+        setData(response?.data);
+        
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+
+    fetchData();
+  }, []);
     return (
         <div className="useredit">
             <Sidebar/>
