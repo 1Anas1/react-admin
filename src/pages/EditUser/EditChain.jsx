@@ -57,7 +57,7 @@ useEffect(() => {
                 <Navbar/>
      
                 <div className="userTitleContainer">
-        <h1 className="userTitle">Profile</h1>
+        <h1 className="userTitle">Profile   </h1>
         
       </div>
         <div className="userContainer">
