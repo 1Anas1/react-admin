@@ -6,10 +6,40 @@ import { useState,useEffect } from "react";
 
 const Datatable = ({member}) => {
   const [data, setData] = useState(userRows);
+  const [result, setResult] = useState([{
+          
+    idUser:"",
+    id: "",
+    chainname: "",
+    img: "",
+    owner: "",
+}]);
   console.log(member,data)
   const handleDelete = (id) => {
     setData(member.filter((item) => item.id !== id));
   };
+  const url = process.env.REACT_APP_URL;
+  useEffect(() => {
+    if (member) {
+     let id=1;
+     const updatedData = member.map((item) => {
+      return {
+          idUser:item.idUser,
+          id: id++,
+          firstname: item.firstname,
+          lastname:item.firstname,
+          img: item.img ? url + "/uploads/" + item.img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+          email: item.email ,
+          statusaccount:item.statusaccount,
+          statusbraclet :item.statusbraclet
+      };
+      
+    })
+      
+      setResult(updatedData);
+      console.log("Component rendered with updated mapUser prop");
+    }
+  }, [member]);
 
   const actionColumn = [
     {
@@ -47,7 +77,7 @@ const Datatable = ({member}) => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={member}
+        rows={result}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

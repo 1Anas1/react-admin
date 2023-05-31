@@ -14,13 +14,9 @@ const DatatableOrders = ({order}) => {
       return {
         idUser:item._id,
         id: id++,
-<<<<<<< HEAD
-        username:item.user.firstName+" "+item.lastName, 
-        typeuser:item.user.role.name,
-=======
-        username:item.user ?item.user.firstName:"test",
-        typeuser:item.user ? item.user.role.name:"test",
->>>>>>> 76cbde848774ac4c02ab50216419ef7ce4b7d51e
+        
+        username:item.user ?item.user.firstName:"amine",
+        typeuser:item.user ? item.user.role.name:"member",
         typebracelet:item.type,
         colorbracelet:item.color,
       };

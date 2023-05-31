@@ -15,6 +15,7 @@ import { Link ,useNavigate} from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
+import logo from './logoo.png'
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
    const token = localStorage.getItem("accessToken");
@@ -34,7 +35,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none",display:'flex',alignItems:'center',justifyContent:'center' }}>
-        <img src={process.env.PUBLIC_URL+'logoo.png'} width='150px' alt="cashless" />
+        <img src={logo} width='150px' alt="cashless" />
         </Link>
       </div>
       <hr />

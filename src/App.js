@@ -155,7 +155,7 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewChain inputs={chaininput} title="Add New Product" />}
+                element={<NewChain inputs={chaininput} title="Add New chain" />}
               />
                   
             </Route>

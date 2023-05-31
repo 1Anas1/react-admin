@@ -16,6 +16,7 @@ const Widget = ({ type }) => {
     case "user":
       data = {
         title: "USERS",
+        amount:25,
         isMoney: false,
         link: "View all users",
         icon: (
@@ -33,6 +34,7 @@ const Widget = ({ type }) => {
       data = {
         title: "ORDERS",
         isMoney: false,
+        amount:10,
         link: "View all orders",
         icon: (
           <ShoppingCartOutlinedIcon
@@ -49,6 +51,7 @@ const Widget = ({ type }) => {
       data = {
         title: "MEMBERS",
         isMoney: false,
+        amount:5,
         link: "View all members",
         icon: (
           <PersonOutlinedIcon
@@ -62,6 +65,7 @@ const Widget = ({ type }) => {
       data = {
         title: "PROFESSIONAL CLIENT",
         isMoney: false,
+        amount:2,
         link: "View all professional client",
         icon: (
           <PersonOutlinedIcon
@@ -99,15 +103,11 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "$"} {data.amount}
         </span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
         {data.icon}
       </div>
     </div>

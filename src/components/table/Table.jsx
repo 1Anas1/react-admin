@@ -7,10 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import axios from "../../api/axios";
 const List = ({ mapUser }) => {
   const [result, setResult] = useState([]);
-
+  
   useEffect(() => {
     if (mapUser) {
       const updatedData = mapUser.map((item) => {

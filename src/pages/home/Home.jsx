@@ -21,6 +21,36 @@ const Home = () => {
     owner: "",
 }]);
 const [loading, setLoading] = useState(true);
+
+  const [operation,setOperation]=useState([]);
+  
+  const userId  = "6468075f7c75aa4df2408b7e";
+  const url = process.env.REACT_APP_URL;
+  useEffect(() => {
+    console.log(userId);
+    async function fetchData() {
+      try {
+        const response = await axios.post("/getUserInfo",{idUser:userId}, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data.user);
+        setOperation(response?.data.user.bracelets[0].operations)
+        
+        
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+
+    fetchData();
+  }, [token, userId]);
   useEffect(() => {
     
     async function fetchData() {
@@ -32,7 +62,7 @@ const [loading, setLoading] = useState(true);
           },
           withCredentials: false,
         });
-        console.log(response?.data.chains)
+        console.log(response?.data)
         setData(response?.data.chains);
         
         setLoading(false);
@@ -71,7 +101,7 @@ const [loading, setLoading] = useState(true);
        {/*  </div>*/}
         <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
-          <Table />
+          <Table mapUser={operation}/>
         </div>
       </div>
     </div>
