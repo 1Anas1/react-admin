@@ -57,7 +57,7 @@ useEffect(() => {
                 <Navbar/>
      
                 <div className="userTitleContainer">
-        <h1 className="userTitle">Profile   </h1>
+        <h1 className="userTitle">Profile</h1>
         
       </div>
         <div className="userContainer">
@@ -70,7 +70,7 @@ useEffect(() => {
                 className="userShowImg"
               />
               <div className="userShowTopTitle">
-                <span className="userShowUsername">Chaneb Tacos</span>
+                <span className="userShowUsername">{console.log(data.chain_name)}</span>
                 <span className="userShowUserTitle">Chain</span>
               </div>
             </div>
