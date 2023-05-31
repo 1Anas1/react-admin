@@ -1,14 +1,34 @@
-import "./new.scss";
+import React, { useState,useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
 import LocationInput from "../../components/LocationInpout/LocatilonInpout";
-
+import axios from "../../api/axios";
 const NewShop = ({ title }) => {
-  const [file, setFile] = useState("");
+  const [formInputs, setFormInputs] = useState({
+    name_shop: "",
+    email: "",
+    phone_number: "",
+    location: "",
+    remise: "",
+    entryfee: "",
+    status_shop: "",
+    owner: "",
+    position: { lat: null, lng: null },
+  });
+  const [ownerOptions, setOwnerOptions] = useState([]);
+  useEffect(() => {
+    const getProfessionalUsers = async () => {
+      try {
+        const response = await axios.get('/getProfessionalUsers');
+        const options = response.data.map(user => ({ value: user._id, label: user.email }));
+        setOwnerOptions(options);
+      } catch (error) {
+        console.error('Failed to fetch professional users', error);
+      }
+    };
 
-  const [selectedOption, setSelectedOption] = useState("");
+    getProfessionalUsers();
+  }, []);
   const inputs = [
     
         
@@ -16,51 +36,45 @@ const NewShop = ({ title }) => {
     { 
       
       id: 1,
-      label: "Name Shop",
+      label: "name_shop",
       type: "text",
       placeholder: "Chaneb Tacos",
       
     },
-    {id: 2,
-        label: "Owner name",
-        type: "text",
-        placeholder: "Eya Belkadhi",
-       
-      },
     {
-        id: 3,
-        label: "Email",
+        id: 2,
+        label: "email",
         type: "text",
         placeholder: "eyabelkadhi@gmail.com",
     },
     {
-        id: 4,
-        label: "Phone number",
+        id: 3,
+        label: "phone_number",
         type: "text",
         placeholder: "98705040",
     },
     {
-        id: 5,
-      label: "Location",
+        id: 4,
+      label: "location",
       type: "text",
       placeholder: "Ariana",
       },
       {
-        id: 6,
-      label: "Remise",
+        id: 5,
+      label: "remise",
       type: "text",
       placeholder: "20",
       },
       
       {
-        id: 7,
-      label: "Entryfee",
+        id: 6,
+      label: "entryfee",
       type: "text",
       placeholder: "10",
       },
     {
-        id: 8,
-      label: "Status shop",
+        id: 7,
+      label: "status_shop",
       type: "select",
       options: [
         { value: "active", label: "Active" },
@@ -68,17 +82,76 @@ const NewShop = ({ title }) => {
        
       ],
     },
+    {
+      id: 8,
+    label: "owner",
+    type: "select",
+    options: [
+      { value: "active", label: "test@gmail.com" },
+      { value: "inactive", label: "teeest@gmail.com" },
+     
+    ],
+  },
   ];
+  const ownerInput = inputs.find(input => input.label === 'owner');
+  ownerInput.options = ownerOptions;
 
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
+  const psoi = (pos) => {
+    console.log("lata", pos);
+    setFormInputs({ ...formInputs, position: pos });
+  };
+
+  const handleOptionChange = (e, label) => {
+    setFormInputs({ ...formInputs, [label]: e.target.value });
+  };
+
+  const handleChange = (e, label) => {
+    setFormInputs({ ...formInputs, [label]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
+
+    const {
+      name_shop,
+      email,
+      phone_number,
+      location,
+      remise,
+      entryfee,
+      status_shop,
+      owner,
+      position,
+    } = formInputs;
+    console.log(formInputs)
+    if (
+      !name_shop ||
+      !email ||
+      !phone_number ||
+      !location ||
+      !remise ||
+      !entryfee ||
+      !status_shop ||
+      !owner
+    ) {
+      alert("All fields must be filled out");
+      return;
+    }
+
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(email)) {
+      alert("Email is not valid");
+      return;
+    }
+
+    if (!position.lat || !position.lng) {
+      alert("Position must be set");
+      return;
+    }
+
+    // Submit form
+    console.log("Form submitted", formInputs);
   };
-   
 
   return (
     <div className="new">
@@ -89,57 +162,45 @@ const NewShop = ({ title }) => {
           <h1>{title}</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
-          </div>
           <div className="right">
-            <form>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ display: "none" }}
-                />
-              </div>
-             
-
+            <form onSubmit={handleSubmit}>
+              <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
               {inputs.map((input) =>
-            input.type === "select" ? (
-              <div className="formInput" key={input.id} >
-                <label>{input.label}</label>
-                <select value={selectedOption} onChange={handleOptionChange}>
-                  
-                  {input.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                  input.type === "select" ? (
+                    <div className="formInput" key={input.id}>
+                      <label>{input.label}</label>
+                      <select
+                        value={formInputs[input.label]}
+                        onChange={(e) => handleChange(e, input.label)}
+                        data-name={input.name}
+                      >
+                        {input.options.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ) : (
+                    <div className="formInput" key={input.id}>
+                      <label>{input.label}</label>
+                      <input
+                        type={input.type}
+                        placeholder={input.placeholder}
+                        value={formInputs[input.label]}
+                        name={input.name}
+                        onChange={(e) => handleChange(e, input.label)}
+                      />
+                    </div>
+                  )
+                )}
               </div>
-            ) : (
-              <div className="formInput" key={input.id}>
-                <label>{input.label}</label>
-                <input type={input.type} placeholder={input.placeholder} />
-              </div>
-              ))}
               <div>
-             <LocationInput /></div>
-              <button>Create</button>
-              
+                <LocationInput setPosition={(pos) => psoi(pos)} />
+              </div>
+              <button style={{ alignSelf: "center" }}>Create</button>
             </form>
           </div>
-         
         </div>
       </div>
     </div>
