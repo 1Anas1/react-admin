@@ -15,7 +15,10 @@ import {
   import { useParams } from 'react-router-dom';
   export default function User() {
     const LOGIN_URL = "/api/professional/getChainById";
+    const UPDATE_URL = "/api/professional/updateChain";
     const { chainId } = useParams();
+    const [file, setFile] = useState("");
+    const [formErrors, setFormErrors] = useState({});
   const [data, setData] = useState([{
           
     idUser:"",
@@ -24,7 +27,47 @@ import {
     img: "",
     owner: "",
 }]);
+const handleFileUpload = (e) => {
+  const uploadedFile = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onloadend = () => {
+    const base64String = reader.result;
+    setFile(base64String);
+    setData({ ...data, img: base64String });
+  };
+
+  reader.readAsDataURL(uploadedFile);
+};
+const validateForm = () => {
+  let isValid = true;
+  let errors = {};
+
+  if (!data.chain_name) {
+    isValid = false;
+    errors["chainname"] = "Chain name is required";
+  }
+
+  if (!file) {
+    isValid = false;
+    errors["Image"] = "Image file is required";
+  }
+
+  setFormErrors(errors);
+
+  return isValid;
+};
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    return;
+  }
+
+  // Continue with API request...
+};
 const [loading, setLoading] = useState(true);
+
 useEffect(() => {
   
       console.log(chainId);
@@ -65,7 +108,7 @@ useEffect(() => {
                   <div className="userShowEdit">
                     <div className="userShowTop">
                       <img
-                        src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/56828017_850214761982793_7110731517202006016_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aN1vSefHQLwAX_R6gmk&_nc_ht=scontent.ftun16-1.fna&oh=00_AfCKiYkr9FkBZvpYAlXCJMztwOHZTcUCh4jtyoqVlMYutg&oe=649E4156"
+                        src={data.chain_image}
                         alt=""
                         className="userShowImg"
                       />
@@ -79,24 +122,21 @@ useEffect(() => {
                   </div>
                   <div className="userUpdate">
                     <span className="userUpdateTitle">Edit</span>
-                    <form className="userUpdateForm">
+                    <form className="userUpdateForm" onSubmit={handleSubmit}>
                       <div className="userUpdateLeft">
                         <div className="userUpdateItem">
                           <label>Chain name</label>
                           <input
                             type="text"
-                            placeholder="anass007"
+                            value={data.chain_name}
+                            onChange={e => setData({...data, chain_name: e.target.value})}
                             className="userUpdateInput"
                           />
+                          {formErrors["chainname"] && (
+    <p className="error">{formErrors["chainname"]}</p>
+  )}
                         </div>
-                        <div className="userUpdateItem">
-                          <label>Owner Name</label>
-                          <input
-                            type="text"
-                            placeholder="cherni anass"
-                            className="userUpdateInput"
-                          />
-                        </div>
+                      
                       
                         
                         
@@ -110,20 +150,34 @@ useEffect(() => {
 
 
 
-          
-            
+        
                       </div>
+                      
                       <div className="userUpdateRight">
+                      {formErrors["Image"] && (
+    <p className="error">{formErrors["Image"]}</p>
+  )}
                         <div className="userUpdateUpload">
                           <img
                             className="userUpdateImg"
-                            src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/56828017_850214761982793_7110731517202006016_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aN1vSefHQLwAX_R6gmk&_nc_ht=scontent.ftun16-1.fna&oh=00_AfCKiYkr9FkBZvpYAlXCJMztwOHZTcUCh4jtyoqVlMYutg&oe=649E4156"
+                            src={file || "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
                             alt=""
                           />
-                          <label htmlFor="file">
-                            <Publish className="userUpdateIcon" />
-                          </label>
-                          <input type="file" id="file" style={{ display: "none" }} />
+                         
+                        
+                <label htmlFor="file">
+                  <Publish className="userUpdateIcon" />
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                  name="file"
+                  
+                />
+                
+           
                         </div>
                         <button className="userUpdateButton">Update</button>
                       </div>
