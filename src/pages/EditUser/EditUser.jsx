@@ -32,8 +32,8 @@ import {
                 className="userShowImg"
               />
               <div className="userShowTopTitle">
-                <span className="userShowUsername">Anas Cherni</span>
-                <span className="userShowUserTitle">Administrateur</span>
+                <span className="userShowUsername">Anass Cherni</span>
+                <span className="userShowUserTitle">Principal Users</span>
               </div>
             </div>
             <div className="userShowBottom">
@@ -53,11 +53,11 @@ import {
               </div>
               <div className="userShowInfo">
                 <MailOutline className="userShowIcon" />
-                <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+                <span className="userShowInfoTitle">cherni.anass02@gmail.com</span>
               </div>
               <div className="userShowInfo">
                 <LocationSearching className="userShowIcon" />
-                <span className="userShowInfoTitle">New York | USA</span>
+                <span className="userShowInfoTitle">NABEUL | TN</span>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ import {
                   <label>Username</label>
                   <input
                     type="text"
-                    placeholder="annabeck99"
+                    placeholder="anass007"
                     className="userUpdateInput"
                   />
                 </div>
@@ -77,7 +77,7 @@ import {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    placeholder="Anna Becker"
+                    placeholder="cherni anass"
                     className="userUpdateInput"
                   />
                 </div>
@@ -85,7 +85,7 @@ import {
                   <label>Email</label>
                   <input
                     type="text"
-                    placeholder="annabeck99@gmail.com"
+                    placeholder="cherni.anass02@gmail.com"
                     className="userUpdateInput"
                   />
                 </div>
@@ -101,7 +101,7 @@ import {
                   <label>Address</label>
                   <input
                     type="text"
-                    placeholder="New York | USA"
+                    placeholder="NABEUL | TN"
                     className="userUpdateInput"
                   />
                 </div>

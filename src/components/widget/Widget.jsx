@@ -82,6 +82,7 @@ const Widget = ({ type }) => {
         data = {
           title: "PAYMENT",
           isMoney: false,
+          amount:5,
           link: "See details",
           icon: (
             <MonetizationOnOutlinedIcon
