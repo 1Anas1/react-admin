@@ -2,8 +2,8 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../sourceOrders";
 import { Link } from "react-router-dom";
-
 import { useState,useEffect } from "react";
+
 const DatatableOrders = ({order}) => {
   const [data, setData] = useState(userRows);
   const [result, setResult] = useState();
@@ -14,8 +14,13 @@ const DatatableOrders = ({order}) => {
       return {
         idUser:item._id,
         id: id++,
+<<<<<<< HEAD
         username:item.user.firstName+" "+item.lastName, 
         typeuser:item.user.role.name,
+=======
+        username:item.user ?item.user.firstName:"test",
+        typeuser:item.user ? item.user.role.name:"test",
+>>>>>>> 76cbde848774ac4c02ab50216419ef7ce4b7d51e
         typebracelet:item.type,
         colorbracelet:item.color,
       };
@@ -38,13 +43,9 @@ const DatatableOrders = ({order}) => {
         return (
           <div className="cellAction">
           
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
-            <Link to='/Orders/new' style={{textDecoration:"none"}}>
+    
+            
+            <Link to={`/Orders/${params.row.idUser}`} style={{textDecoration:"none"}}>
             <div className="EditButton">Edit</div>
             </Link>
           </div>

@@ -5,13 +5,46 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
-
+import { useState,useEffect } from "react";
+import axios from "../../api/axios";
 const Home = () => {
   const token = localStorage.getItem("accessToken");
   const role = localStorage.getItem('role');
   const isAdmin = role === 'admin';
   const isProfessional = role === 'professional';
+  const [data, setData] = useState([{
+          
+    idUser:"",
+    id: "",
+    chainname: "",
+    img: "",
+    owner: "",
+}]);
+const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    
+    async function fetchData() {
+      try {
+        const response = await axios.get("/getUserStatistics", {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data.chains)
+        setData(response?.data.chains);
+        
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
 
+    fetchData();
+  }, [token]);
   return (
     <div className="home">
       <Sidebar />
