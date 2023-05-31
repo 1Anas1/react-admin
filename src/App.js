@@ -28,6 +28,10 @@ import { orderinput } from "./formsourceorder";
 import { chaininput } from "./formsourcechain";
 import Profil from "./pages/profil/Profil";
 import EditUser from './pages/EditUser/EditUser'
+import EditShop from './pages/EditUser/EditShop'
+import EditUser1 from './pages/EditUser/EditUser1'
+import EditEmpo from './pages/EditUser/EditEmpo'
+import EditChain from './pages/EditUser/EditChain'
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const token = localStorage.getItem("accessToken");
@@ -46,14 +50,18 @@ function App() {
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
               <Route path="edit/:userId">
-              <Route index element={<EditUser/>}/>
+              <Route index element={<EditUser1/>}/>
               </Route>
               <Route path="member">
               <Route path=":userId" element={<SingleMember/>} />
+              <Route path="edit/:userId">
+              <Route index element={<EditUser1/>}/>
+              </Route>
               <Route path="newemp" element={<NewMember inputs={userproInputs} title="Add New User" />}/>
               </Route>
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
+              
               </Route>
               <Route path="pro">
               <Route path="new" element={<NewPro inputs={userproInputs} title="Add New User" />} />
@@ -74,7 +82,16 @@ function App() {
               </Route>
               <Route path="shop">
               <Route path=":productId" element={<SingleShop />} />
+              <Route path="edit/:userId">
+              <Route index element={<EditShop/>}/>
               </Route>
+              <Route path="employe">
+              <Route path="edit/:userId">
+              <Route index element={<EditEmpo/>}/></Route>
+              </Route>
+              </Route>
+
+              
               <Route
                 path="new"
                 element={<NewShop inputs={shopinput} title="Add New Product" />}
@@ -87,28 +104,32 @@ function App() {
                 path="singlemp"
                 element={<SingleEmploye/>}
               />
-
+            </Route>
 
               
-            </Route>
+            
             <Route path="Orders">
               <Route index element={<ListOrders />} />
               <Route path="shop">
               <Route path=":orderId" element={<SingleShop />} />
+              
               </Route>
               <Route
                 path="new"
                 element={<NewOrder title="Add New Product" />}
               />
       
-
+      
               
             </Route>
             <Route path="chains">
               <Route index element={<ListChains/>} />
               <Route path="chain">
               <Route path=":orderId" element={<SingleShop />} />
+              <Route path="edit/:userId">
+              <Route index element={<EditChain/>}/></Route>
               </Route>
+              
               <Route
                 path="new"
                 element={<NewChain inputs={chaininput} title="Add New Product" />}
