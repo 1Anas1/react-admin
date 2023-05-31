@@ -126,7 +126,7 @@ function App() {
               <Route index element={<ListChains/>} />
               <Route path="chain">
               <Route path=":orderId" element={<SingleShop />} />
-              <Route path="edit/:userId">
+              <Route path="edit/:chainId">
               <Route index element={<EditChain/>}/></Route>
               </Route>
               
@@ -172,7 +172,7 @@ function App() {
               <Route path="chains">
               <Route index element={<ListChains/>} />
               <Route path="chain">
-              <Route path=":chainId" element={<SingleShop />} />
+              <Route path=":orderId" element={<SingleShop />} />
               </Route>
               <Route
                 path="new"
