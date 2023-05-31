@@ -60,7 +60,7 @@ const DatatableChains = ({chain}) => {
                 >
                   Delete
                 </div>
-                <Link to={`/users/${params.row.idUser}`} style={{ textDecoration: "none" }}>
+                <Link to={`/chains/chain/edit/${params.row.idUser}`} style={{ textDecoration: "none" }}>
                   <div className="EditButton">Edit</div>
                 </Link>
               </>

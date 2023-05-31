@@ -62,7 +62,7 @@ const Datatablemember = ({member}) => {
             >
               Delete
             </div>
-            <Link to='/users/member/newemp' style={{textDecoration:"none"}}>
+            <Link to={`/users/edit/${params.row.idUser}`} style={{textDecoration:"none"}}>
             <div className="EditButton">Edit</div>
             </Link>
           </div>
