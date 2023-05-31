@@ -3,9 +3,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import LocationInput from "../../components/LocationInpout/LocatilonInpout";
 import axios from "../../api/axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 const NewShop = ({ title }) => {
-  const history = useHistory();
+  const navigate = useNavigate ();
   const [formInputs, setFormInputs] = useState({
     name_shop: "",
     email: "",
@@ -165,7 +165,16 @@ chainInput.options = chainOptions;
       alert("Email is not valid");
       return;
     }
-
+    console.log({
+      name_shop,
+      email,
+      phone_number,
+      location,
+      status_shop,
+      owner,
+      position,
+      chain,
+    });
     // Here, you may need to replace 'accessToken' with the actual variable name where your access token is stored.
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -188,7 +197,7 @@ chainInput.options = chainOptions;
       );
       if (response.status === 201) {
         console.log("Response from server: ", response.data);
-        history.push("/"); // assuming "/" is your home route
+        navigate("/"); // assuming "/" is your home route
       }
       
     } catch (error) {

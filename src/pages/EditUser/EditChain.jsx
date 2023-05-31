@@ -48,10 +48,6 @@ const validateForm = () => {
     errors["chainname"] = "Chain name is required";
   }
 
-  if (!file) {
-    isValid = false;
-    errors["Image"] = "Image file is required";
-  }
 
   setFormErrors(errors);
 
@@ -64,8 +60,34 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  // Continue with API request...
+  // Prepare the data to send in the request body
+  const updateData = {
+    chain_id: chainId,
+    chain_name: data.chain_name,
+    chain_image: data.img,
+  };
+
+  // Make the API request
+  try {
+    const response = await axios.put(UPDATE_URL, updateData, {
+      headers: {
+        'Content-Type': 'application/json',
+        // You may need to include an Authorization header here with your access token
+      },
+    });
+
+    // Handle the response
+    if (response.status === 200) {
+      alert('Chain updated successfully!');
+    } else {
+      alert('An error occurred while updating the chain.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while updating the chain.');
+  }
 };
+
 const [loading, setLoading] = useState(true);
 
 useEffect(() => {
