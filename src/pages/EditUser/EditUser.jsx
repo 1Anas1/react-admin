@@ -10,14 +10,61 @@ import {
   import "./EditUser.scss";
   import Navbar from "../../components/navbar/Navbar";
   import Sidebar from "../../components/sidebar/Sidebar";
-  
+  import React, { useState, useEffect } from "react";
+  import axios from "../../api/axios";
+  import { useParams } from "react-router-dom";
   export default function User() {
+    const [user,setUser]=useState({});
+  const [member,setMember]=useState([]);
+  const [operation,setOperation]=useState([]);
+  const token = localStorage.getItem("accessToken");
+  const { userId } = useParams();
+  const url = process.env.REACT_APP_URL;
+    const [data, setData] = useState([{
+      id: "",
+      firstname: "",
+      lastname:"",
+      img: "",
+      email: "",
+      statusaccount  : "",
+      statusbraclet :""
+    }]);
+    const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    console.log(userId);
+    async function fetchData() {
+      try {
+        const response = await axios.post("/getUserInfo",{idUser:userId}, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data.user);
+        setUser(response?.data.user);
+        setOperation(response?.data.user.bracelets[0].operations)
+        console.log(typeof response?.data.user.children)
+        setMember(response?.data.user.children)
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+
+    fetchData();
+  }, [token]);
     return (
         <div className="useredit">
             <Sidebar/>
             <div className="usercontainer1">
                 <Navbar/>
-     
+                {!loading &&(
+                  <>
                 <div className="userTitleContainer">
         <h1 className="userTitle">Profile</h1>
         
@@ -137,6 +184,8 @@ import {
             </form>
           </div>
         </div>
+        </>
+                )}
       </div>
       </div>
     
