@@ -15,7 +15,7 @@ import {
   import { useParams } from 'react-router-dom';
   export default function User() {
     const LOGIN_URL = "/api/professional/getChainById";
-    const UPDATE_URL = "/api/professional/updateChain";
+    const UPDATE_URL = "/api/professional/editChain";
     const { chainId } = useParams();
     const [file, setFile] = useState("");
     const [formErrors, setFormErrors] = useState({});
