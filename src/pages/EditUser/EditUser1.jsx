@@ -31,8 +31,6 @@ const [data, setData] = useState({
   phone:"",
   gender:"",
   birthDate:"",
-  statusaccount  : "",
-  statusBraclet :"",
   is_disabled:"",
 });
 
@@ -74,8 +72,7 @@ useEffect(() => {
         phone: response?.data.user.phone,
         birthDate: response?.data.user.birthDate,
         gender: response?.data.user.gender,
-        is_disabled: response?.data.user.is_disabled,
-        statusBracelet: response?.data.user.bracelets[0].status,
+        is_disabled: response?.data.user.bracelets[0].is_disabled,
       });
       setOperation(response?.data.user.bracelets[0].operations)
       console.log(typeof response?.data.user.children)
@@ -89,7 +86,7 @@ useEffect(() => {
   }
 
   fetchData();
-}, [token]);
+}, [token, userId]);
 const handleChange = (e) => {
   setData({
     ...data,
@@ -99,7 +96,7 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  
+  console.log(data,'hhhhhhhhhhh');
   // send data to the server
   const response = await axios.post("/editUser", {...data, idUser: userId}, {
     headers: {
