@@ -32,6 +32,7 @@ import EditShop from './pages/EditUser/EditShop'
 import EditUser1 from './pages/EditUser/EditUser1'
 import EditEmpo from './pages/EditUser/EditEmpo'
 import EditChain from './pages/EditUser/EditChain'
+import Editpro from './pages/EditUser/Editpro'
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const token = localStorage.getItem("accessToken");
@@ -62,7 +63,7 @@ function App() {
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
               <Route path="edit/:userId">
-              <Route index element={<EditUser1/>}/>
+              <Route index element={<Editpro/>}/>
               </Route>
             
             
@@ -139,7 +140,8 @@ function App() {
                   
             </Route>
             <Route path="Profil">
-              <Route index element={<EditUser/>}/>
+              <Route path="edit">
+              <Route index element={<EditUser/>}/></Route>
               </Route>
             </>
           )}

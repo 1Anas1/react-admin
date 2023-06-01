@@ -179,7 +179,7 @@ const handleSubmit = async (e) => {
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">{user.birthDate}</span>
+              <span className="userShowInfoTitle">{data.birthDate ? new Date(data.birthDate).toISOString().substring(0, 10) : ""}</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
@@ -236,7 +236,7 @@ const handleSubmit = async (e) => {
                 <label>Date of birth</label>
                 <input
                   type="date"
-                  value={data.birthDate}
+                  value={data.birthDate ? new Date(data.birthDate).toISOString().substring(0, 10) : ""}
                   onChange={e => setData({...data, birthDate: e.target.value})}
                   className="userUpdateInput"
                 />
@@ -250,7 +250,7 @@ const handleSubmit = async (e) => {
 </select>
 </div>
 
-{role !== "professional" && user.bracelets[0] && (
+
   <div className='userUpdateItem'>
     <label htmlFor="is_disabled">Status bracelet</label>
     <select name="is_disabled" id="is_disabled"  onChange={e => setData({...data, is_disabled: e.target.value})}>
@@ -258,7 +258,6 @@ const handleSubmit = async (e) => {
       <option value="true" selected={user.bracelets[0].is_disabled}>Inactive</option>
     </select>
   </div>
-)}
 
 
 

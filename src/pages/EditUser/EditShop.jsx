@@ -10,8 +10,106 @@ import {
   import "./EditUser.scss";
   import Navbar from "../../components/navbar/Navbar";
   import Sidebar from "../../components/sidebar/Sidebar";
-  
+  import React, { useState, useEffect } from "react";
+  import LocationInput from "../../components/LocationInpout/LocatilonInpout";
+import axios from "../../api/axios";
+import { useParams } from "react-router-dom";
   export default function User() {
+    const [user,setUser]=useState({});
+  const [file, setFile] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+const [member,setMember]=useState([]);
+const [operation,setOperation]=useState([]);
+const token = localStorage.getItem("accessToken");
+const { userId } = useParams();
+const url = process.env.REACT_APP_URL;
+const [data, setData] = useState({
+  id: "",
+  name_shop: "",
+  email:"",
+  phone_number: "",
+  location: "",
+  status_shop: "",
+  owner:"",
+  chain:"",
+  position: "",
+});
+const psoi = (pos) => {
+  console.log("lata", pos);
+  setData({ ...data, position: pos });
+};
+const role =localStorage.getItem('role');
+  const [loading, setLoading] = useState(true);
+  
+  
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`/api/professional/getSellingPointInfo/${userId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+  
+        setData({
+          name_shop: response?.data.name_shop,
+          email: response?.data.email,
+          phone_number: response?.data.phone_number,
+          location: response?.data.location,
+          status_shop: response?.data.status_shop,
+          owner: response?.data.owner,
+          chain: response?.data.chain,
+          position: response?.data.position,
+        });
+  
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+  
+    fetchData();
+  }, [token, userId]);
+  
+  
+  
+  
+  
+const handleChange = (e) => {
+  setData({
+    ...data,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await axios.put(`${url}/api/professional/editShop/${userId}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 200) {
+      console.log('Shop information updated successfully');
+    } else {
+      console.log('Update unsuccessful');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
     return (
         <div className="useredit">
             <Sidebar/>
@@ -46,10 +144,12 @@ import {
                 <div className="userUpdateItem">
                   <label>Name shop</label>
                   <input
-                    type="text"
-                    placeholder="anass007"
-                    className="userUpdateInput"
-                  />
+      type="text"
+      placeholder="anass007"
+      className="userUpdateInput"
+      value={data.name_shop || ''}
+      onChange={(e) => setData({ ...data, name_shop: e.target.value })}
+    />
                 </div>
                 <div className="userUpdateItem">
                   <label>Email</label>
@@ -57,6 +157,18 @@ import {
                     type="text"
                     placeholder="cherni anass"
                     className="userUpdateInput"
+                    value={data.email || ''}
+      onChange={(e) => setData({ ...data, email: e.target.value })}
+                  />
+                </div>
+                <div className="userUpdateItem">
+                  <label>Owner Email</label>
+                  <input
+                    type="text"
+                    placeholder="cherni anass"
+                    className="userUpdateInput"
+                    value={data.owner || ''}
+      onChange={(e) => setData({ ...data, owner: e.target.value })}
                   />
                 </div>
                 <div className="userUpdateItem">
@@ -65,21 +177,23 @@ import {
                     type="text"
                     placeholder="cherni.anass02@gmail.com"
                     className="userUpdateInput"
+                    value={data.phone_number || ''}
+      onChange={(e) => setData({ ...data, phone_number: e.target.value })}
                   />
                 </div>
                 <div className="userUpdateItem">
                   <label>Remise</label>
                   <input
                     type="text"
-                    placeholder="+1 123 456 67"
+                    placeholder="20"
                     className="userUpdateInput"
                   />
                 </div>
                 <div className="userUpdateItem">
                   <label>Entryfee</label>
                   <input
-                    type="date"
-                    
+                    type="text"
+                    placeholder="10"
                     className="userUpdateInput"
                   />
                 </div>
@@ -88,29 +202,27 @@ import {
 
 <div className='userUpdateItem'>
   <label for="status shop">Status shop</label>
-  <select id="status shop" className="selectinfo">
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
+  <select id="status shop" className="selectinfo" onChange={(e) => setData({ ...data, status_shop: e.target.value })}>
+    <option value="active"selected={data.status_shop === 'active'}>Active</option>
+    <option value="inactive"selected={data.status_shop === 'inactive'}>Inactive</option>
   </select>
 </div>
-
-
+<div className='userUpdateItem'>
+<label for="chain">Chain</label>
+<select name="chain" id="gender" value={data.namechain || ''}  >
+  <option value="" disabled>Select gender</option>
+  <option ></option>
+</select>
+</div>
+<div>
+                <LocationInput setPosition={(pos) => psoi(pos)} />
+              </div>
    
     
               </div>
               <div className="userUpdateRight">
-                <div className="userUpdateUpload">
-                  <img
-                    className="userUpdateImg"
-                    src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/56828017_850214761982793_7110731517202006016_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aN1vSefHQLwAX_R6gmk&_nc_ht=scontent.ftun16-1.fna&oh=00_AfCKiYkr9FkBZvpYAlXCJMztwOHZTcUCh4jtyoqVlMYutg&oe=649E4156"
-                    alt=""
-                  />
-                  <label htmlFor="file">
-                    <Publish className="userUpdateIcon" />
-                  </label>
-                  <input type="file" id="file" style={{ display: "none" }} />
-                </div>
-                <button className="userUpdateButton">Update</button>
+                
+                <button className="userUpdateButton" onClick={handleSubmit}>Update</button>
               </div>
             </form>
           </div>
