@@ -32,7 +32,8 @@ const [data, setData] = useState({
   gender:"",
   birthDate:"",
   statusaccount  : "",
-  statusBraclet :""
+  statusBraclet :"",
+  is_disabled:"",
 });
 
   const [loading, setLoading] = useState(true);
@@ -73,6 +74,7 @@ useEffect(() => {
         phone: response?.data.user.phone,
         birthDate: response?.data.user.birthDate,
         gender: response?.data.user.gender,
+        is_disabled: response?.data.user.is_disabled,
         statusBracelet: response?.data.user.bracelets[0].status,
       });
       setOperation(response?.data.user.bracelets[0].operations)
@@ -206,19 +208,22 @@ const handleSubmit = async (e) => {
               </div>
               <div className='userUpdateItem'>
 <label for="gender">Gender</label>
-<select name="gender" id="gender"  value={user.gender} onChange={handleChange}>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
+<select name="gender" id="gender" value={user.gender || ''} onChange={handleChange}>
+  <option value="" disabled>Select gender</option>
+  <option value="Male" selected={user.gender === 'Male'}>Male</option>
+  <option value="Female" selected={user.gender === 'Female'}>Female</option>
 </select>
 </div>
 
 <div className='userUpdateItem'>
-<label for="Status Bracelet">Status bracelet</label>
-<select name="statusBracelet" id="statusBracelet"  value={user.statusBracelet} onChange={handleChange}>
-  <option value="active">Active</option>
-  <option value="inactive">Inactive</option>
-</select>
+  <label htmlFor="is_disabled">Status bracelet</label>
+  <select name="is_disabled" id="is_disabled" defaultValue={user.is_disabled ? user.is_disabled.toString() : ''} onChange={handleChange}>
+    <option value="false">Active</option>
+    <option value="true">Inactive</option>
+  </select>
 </div>
+
+
 
  
   
@@ -241,6 +246,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="file"
                   id="file"
+                
                   onChange={handleFileUpload}
                   style={{ display: "none" }}
                   name="file"
