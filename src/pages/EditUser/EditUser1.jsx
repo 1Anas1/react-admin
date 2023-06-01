@@ -46,7 +46,7 @@ const [data, setData] = useState({
       reader.onloadend = () => {
         const base64String = reader.result;
         setFile(base64String);
-        setData({ ...data, img: base64String });
+        setData({ ...data, image: base64String });
       };
     
       reader.readAsDataURL(uploadedFile);
