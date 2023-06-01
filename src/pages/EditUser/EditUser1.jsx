@@ -31,6 +31,8 @@ const [data, setData] = useState({
   phone:"",
   gender:"",
   birthDate:"",
+  statusaccount  : "",
+  statusBraclet :"",
   is_disabled:"",
 });
 
@@ -72,7 +74,8 @@ useEffect(() => {
         phone: response?.data.user.phone,
         birthDate: response?.data.user.birthDate,
         gender: response?.data.user.gender,
-        is_disabled: response?.data.user.bracelets[0].is_disabled,
+        is_disabled: response?.data.user.is_disabled,
+        statusBracelet: response?.data.user.bracelets[0].status,
       });
       setOperation(response?.data.user.bracelets[0].operations)
       console.log(typeof response?.data.user.children)
@@ -86,7 +89,7 @@ useEffect(() => {
   }
 
   fetchData();
-}, [token, userId]);
+}, [token]);
 const handleChange = (e) => {
   setData({
     ...data,
@@ -96,18 +99,58 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(data,'hhhhhhhhhhh');
-  // send data to the server
-  const response = await axios.post("/editUser", {...data, idUser: userId}, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    withCredentials: false,
-  });
+
+  // Prepare the data to send in the request body
+  const requestBody = {
+    ...data,
+    idUser: userId,
+   firstName : data.firstName,
+    lastName : data.lastName,
+    email : data.email,
+    phone : data.phone,
+   birthDate :data.birthDate,
+  };
+
+  try {
+    // send data to the server
+    const response = await axios.put("/editUser", requestBody, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: false,
+    });
   
-  // handle response...
+    // handle response
+    if (response.status === 200) {
+      // Handle successful response here
+      console.log('User information updated successfully');
+      // Optionally redirect the user to another page or reset form fields
+    } else {
+      // Handle other responses here
+      console.log('Update unsuccessful');
+    }
+  } catch (error) {
+    // Handle errors here
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in Node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+  }
 };
+
+
   return (
       <div className="useredit">
           <Sidebar/>
@@ -163,8 +206,8 @@ const handleSubmit = async (e) => {
                 <label>First name</label>
                 <input
                   type="text"
-                  value={user.firstName}
-                  onChange={handleChange}
+                  value={data.firstName}
+                  onChange={e => setData({...data, firstName: e.target.value})}
                   className="userUpdateInput"
                 />
               </div>
@@ -172,8 +215,8 @@ const handleSubmit = async (e) => {
                 <label>Last Name</label>
                 <input
                   type="text"
-                  value={user.lastName}
-                  onChange={handleChange}
+                  value={data.lastName}
+                  onChange={e => setData({...data, lastName: e.target.value})}
                   className="userUpdateInput"
                 />
               </div>
@@ -181,16 +224,16 @@ const handleSubmit = async (e) => {
                 <label>Email</label>
                 <input
                   type="text"
-                  value={user.email}
-                  onChange={handleChange}
+                  value={data.email}
+                  onChange={e => setData({...data, email: e.target.value})}
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Phone</label>
                 <input
-                 value={user.phone}
-                 onChange={handleChange}
+                 value={data.phone}
+                 onChange={e => setData({...data, phone: e.target.value})}
                   className="userUpdateInput"
                 />
               </div>
@@ -198,14 +241,14 @@ const handleSubmit = async (e) => {
                 <label>Date of birth</label>
                 <input
                   type="date"
-                  value={user.birthDate}
-                  onChange={handleChange}
+                  value={data.birthDate}
+                  onChange={e => setData({...data, birthDate: e.target.value})}
                   className="userUpdateInput"
                 />
               </div>
               <div className='userUpdateItem'>
 <label for="gender">Gender</label>
-<select name="gender" id="gender" value={user.gender || ''} onChange={handleChange}>
+<select name="gender" id="gender" value={data.gender || ''}  onChange={e => setData({...data, gender: e.target.value})}>
   <option value="" disabled>Select gender</option>
   <option value="Male" selected={user.gender === 'Male'}>Male</option>
   <option value="Female" selected={user.gender === 'Female'}>Female</option>
@@ -214,7 +257,7 @@ const handleSubmit = async (e) => {
 
 <div className='userUpdateItem'>
   <label htmlFor="is_disabled">Status bracelet</label>
-  <select name="is_disabled" id="is_disabled" onChange={handleChange}>
+  <select name="is_disabled" id="is_disabled"  onChange={e => setData({...data, is_disabled: e.target.value})}>
     <option value="false" selected={!user.bracelets[0].is_disabled}>Active</option>
     <option value="true" selected={user.bracelets[0].is_disabled}>Inactive</option>
   </select>
@@ -250,7 +293,7 @@ const handleSubmit = async (e) => {
                   
                 />
                 </div>
-              <button className="userUpdateButton" type="submit">Update</button>
+              <button className="userUpdateButton" >Update</button>
             </div>
           </form>
         </div>
