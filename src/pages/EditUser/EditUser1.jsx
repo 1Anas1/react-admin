@@ -206,9 +206,9 @@ const handleSubmit = async (e) => {
               </div>
               <div className='userUpdateItem'>
 <label for="gender">Gender</label>
-<select name="gender" id="gender"  value={user.gender} onChange={handleChange}>
-  <option value="male">Male</option>
-  <option value="female">Female</option>
+<select name="gender" id="gender" value={user.gender} onChange={handleChange}>
+  <option value="Male" selected={user.gender === 'Male'}>Male</option>
+  <option value="Female" selected={user.gender === 'Female'}>Female</option>
 </select>
 </div>
 

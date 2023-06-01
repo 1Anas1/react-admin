@@ -13,6 +13,7 @@ import {
   import Navbar from "../../components/navbar/Navbar";
   import Sidebar from "../../components/sidebar/Sidebar";
   import { useParams } from 'react-router-dom';
+  const url = process.env.REACT_APP_URL;
   export default function User() {
     const LOGIN_URL = "/api/professional/getChainById";
     const UPDATE_URL = "/api/professional/editChain";
@@ -130,7 +131,7 @@ useEffect(() => {
                   <div className="userShowEdit">
                     <div className="userShowTop">
                       <img
-                        src={data.chain_image}
+                        src={url+"/uploads/"+data.chain_image}
                         alt=""
                         className="userShowImg"
                       />
