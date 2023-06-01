@@ -65,9 +65,10 @@ useEffect(() => {
         },
         withCredentials: false,
       });
-      console.log(response?.data.user);
+      console.log(response?.data.user,'hhhhh');
       setUser(response?.data.user);
-      setData({
+      console.log('22222222222');
+     setData({
         firstName: response?.data.user.firstName,
         lastName: response?.data.user.lastName,
         email: response?.data.user.email,
@@ -75,10 +76,11 @@ useEffect(() => {
         birthDate: response?.data.user.birthDate,
         gender: response?.data.user.gender,
         is_disabled: response?.data.user.is_disabled,
-        statusBracelet: response?.data.user.bracelets[0].status,
+       statusBracelet: response?.data.user.bracelets[0] ?response?.data.user.bracelets[0].status:null,
       });
-      setOperation(response?.data.user.bracelets[0].operations)
-      console.log(typeof response?.data.user.children)
+      console.log('333333333');
+      
+      console.log(typeof response?.data.user.children,'gggg')
       setMember(response?.data.user.children)
       setLoading(false);
     } catch (err) {
@@ -248,7 +250,7 @@ const handleSubmit = async (e) => {
 </select>
 </div>
 
-{role !== "professional" && (
+{role !== "professional" && user.bracelets[0] && (
   <div className='userUpdateItem'>
     <label htmlFor="is_disabled">Status bracelet</label>
     <select name="is_disabled" id="is_disabled"  onChange={e => setData({...data, is_disabled: e.target.value})}>

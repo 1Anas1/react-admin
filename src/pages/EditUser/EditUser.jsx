@@ -10,7 +10,9 @@ import {
   import "./EditUser.scss";
   import Navbar from "../../components/navbar/Navbar";
   import Sidebar from "../../components/sidebar/Sidebar";
-  
+  import React, { useState, useEffect } from "react";
+import axios from "../../api/axios";
+import { useParams } from "react-router-dom";
   export default function User() {
     const [user,setUser]=useState({});
   const [member,setMember]=useState([]);
