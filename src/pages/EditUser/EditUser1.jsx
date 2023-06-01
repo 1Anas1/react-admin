@@ -15,22 +15,43 @@ import axios from "../../api/axios";
 import { useParams } from "react-router-dom";
 export default function User() {
   const [user,setUser]=useState({});
+  const [file, setFile] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 const [member,setMember]=useState([]);
 const [operation,setOperation]=useState([]);
 const token = localStorage.getItem("accessToken");
 const { userId } = useParams();
 const url = process.env.REACT_APP_URL;
-  const [data, setData] = useState([{
-    id: "",
-    firstname: "",
-    lastname:"",
-    img: "",
-    email: "",
-    statusaccount  : "",
-    statusbraclet :""
-  }]);
-  const [loading, setLoading] = useState(true);
+const [data, setData] = useState({
+  id: "",
+  firstName: "",
+  lastName:"",
+  image: "",
+  email: "",
+  phone:"",
+  gender:"",
+  birthDate:"",
+  statusaccount  : "",
+  statusBraclet :""
+});
 
+  const [loading, setLoading] = useState(true);
+  const handleFileUpload = (e) => {
+    const uploadedFile = e.target.files[0];
+    
+    if (uploadedFile) {  // check if file exists
+      const reader = new FileReader();
+  
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        setFile(base64String);
+        setData({ ...data, img: base64String });
+      };
+    
+      reader.readAsDataURL(uploadedFile);
+    }
+  };
+  
 
 useEffect(() => {
   console.log(userId);
@@ -45,6 +66,15 @@ useEffect(() => {
       });
       console.log(response?.data.user);
       setUser(response?.data.user);
+      setData({
+        firstName: response?.data.user.firstName,
+        lastName: response?.data.user.lastName,
+        email: response?.data.user.email,
+        phone: response?.data.user.phone,
+        birthDate: response?.data.user.birthDate,
+        gender: response?.data.user.gender,
+        statusBracelet: response?.data.user.bracelets[0].status,
+      });
       setOperation(response?.data.user.bracelets[0].operations)
       console.log(typeof response?.data.user.children)
       setMember(response?.data.user.children)
@@ -58,6 +88,27 @@ useEffect(() => {
 
   fetchData();
 }, [token]);
+const handleChange = (e) => {
+  setData({
+    ...data,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  // send data to the server
+  const response = await axios.post("/editUser", {...data, idUser: userId}, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: false,
+  });
+  
+  // handle response...
+};
   return (
       <div className="useredit">
           <Sidebar/>
@@ -79,7 +130,7 @@ useEffect(() => {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anass Cherni</span>
+              <span className="userShowUsername">{user.firstName}</span>
               <span className="userShowUserTitle">Principal Users</span>
             </div>
           </div>
@@ -107,21 +158,23 @@ useEffect(() => {
         </div>
         <div className="userUpdate">
           <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm">
+          <form className="userUpdateForm" onSubmit={handleSubmit}>
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>Username</label>
+                <label>First name</label>
                 <input
                   type="text"
-                  placeholder="anass007"
+                  value={user.firstName}
+                  onChange={handleChange}
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Full Name</label>
+                <label>Last Name</label>
                 <input
                   type="text"
-                  placeholder="cherni anass"
+                  value={user.lastName}
+                  onChange={handleChange}
                   className="userUpdateInput"
                 />
               </div>
@@ -129,15 +182,16 @@ useEffect(() => {
                 <label>Email</label>
                 <input
                   type="text"
-                  placeholder="cherni.anass02@gmail.com"
+                  value={user.email}
+                  onChange={handleChange}
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Phone</label>
                 <input
-                  type="text"
-                  placeholder="+1 123 456 67"
+                 value={user.phone}
+                 onChange={handleChange}
                   className="userUpdateInput"
                 />
               </div>
@@ -145,13 +199,14 @@ useEffect(() => {
                 <label>Date of birth</label>
                 <input
                   type="date"
-                  
+                  value={user.birthDate}
+                  onChange={handleChange}
                   className="userUpdateInput"
                 />
               </div>
               <div className='userUpdateItem'>
 <label for="gender">Gender</label>
-<select id="gender">
+<select name="gender" id="gender"  value={user.gender} onChange={handleChange}>
   <option value="male">Male</option>
   <option value="female">Female</option>
 </select>
@@ -159,27 +214,40 @@ useEffect(() => {
 
 <div className='userUpdateItem'>
 <label for="Status Bracelet">Status bracelet</label>
-<select id="gender">
+<select name="statusBracelet" id="statusBracelet"  value={user.statusBracelet} onChange={handleChange}>
   <option value="active">Active</option>
   <option value="inactive">Inactive</option>
 </select>
 </div>
+
  
   
             </div>
             <div className="userUpdateRight">
-              <div className="userUpdateUpload">
-                <img
-                  className="userUpdateImg"
-                  src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/56828017_850214761982793_7110731517202006016_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aN1vSefHQLwAX_R6gmk&_nc_ht=scontent.ftun16-1.fna&oh=00_AfCKiYkr9FkBZvpYAlXCJMztwOHZTcUCh4jtyoqVlMYutg&oe=649E4156"
-                  alt=""
-                />
+                      {formErrors["Image"] && (
+    <p className="error">{formErrors["Image"]}</p>
+  )}
+                        <div className="userUpdateUpload">
+                          <img
+                            className="userUpdateImg"
+                            src={file || "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
+                            alt=""
+                          />
+                         
+                        
                 <label htmlFor="file">
                   <Publish className="userUpdateIcon" />
                 </label>
-                <input type="file" id="file" style={{ display: "none" }} />
-              </div>
-              <button className="userUpdateButton">Update</button>
+                <input
+                  type="file"
+                  id="file"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                  name="file"
+                  
+                />
+                </div>
+              <button className="userUpdateButton" type="submit">Update</button>
             </div>
           </form>
         </div>
