@@ -35,7 +35,7 @@ const [data, setData] = useState({
   statusBraclet :"",
   is_disabled:"",
 });
-
+const role =localStorage.getItem('role');
   const [loading, setLoading] = useState(true);
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
@@ -186,7 +186,7 @@ const handleSubmit = async (e) => {
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">cherni.anass02@gmail.com</span>
+              <span className="userShowInfoTitle">{user.email}</span>
             </div>
            
           </div>
@@ -248,13 +248,15 @@ const handleSubmit = async (e) => {
 </select>
 </div>
 
-<div className='userUpdateItem'>
-  <label htmlFor="is_disabled">Status bracelet</label>
-  <select name="is_disabled" id="is_disabled"  onChange={e => setData({...data, is_disabled: e.target.value})}>
-    <option value="false" selected={!user.bracelets[0].is_disabled}>Active</option>
-    <option value="true" selected={user.bracelets[0].is_disabled}>Inactive</option>
-  </select>
-</div>
+{role !== "professional" && (
+  <div className='userUpdateItem'>
+    <label htmlFor="is_disabled">Status bracelet</label>
+    <select name="is_disabled" id="is_disabled"  onChange={e => setData({...data, is_disabled: e.target.value})}>
+      <option value="false" selected={!user.bracelets[0].is_disabled}>Active</option>
+      <option value="true" selected={user.bracelets[0].is_disabled}>Inactive</option>
+    </select>
+  </div>
+)}
 
 
 
