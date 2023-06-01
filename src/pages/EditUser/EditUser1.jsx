@@ -101,19 +101,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   // Prepare the data to send in the request body
-  const requestBody = {
-    ...data,
-    idUser: userId,
-   firstName : data.firstName,
-    lastName : data.lastName,
-    email : data.email,
-    phone : data.phone,
-   birthDate :data.birthDate,
-  };
+  data.userId=userId;
+  console.log(data)
 
   try {
     // send data to the server
-    const response = await axios.put("/editUser", requestBody, {
+    const response = await axios.put("/editUser", data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
