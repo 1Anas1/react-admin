@@ -138,16 +138,16 @@ const handleSubmit = async (e) => {
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">cherni.as</span>
+              <span className="userShowInfoTitle">{user.firstName} {user.lastName}</span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
+              <span className="userShowInfoTitle">{user.birthDate}</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
               <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
+              <span className="userShowInfoTitle">{user.phone}</span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
@@ -207,8 +207,8 @@ const handleSubmit = async (e) => {
               <div className='userUpdateItem'>
 <label for="gender">Gender</label>
 <select name="gender" id="gender"  value={user.gender} onChange={handleChange}>
-  <option value="male">Male</option>
-  <option value="female">Female</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
 </select>
 </div>
 
