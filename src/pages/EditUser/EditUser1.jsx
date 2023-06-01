@@ -127,7 +127,7 @@ const handleSubmit = async (e) => {
         <div className="userShow">
           <div className="userShowTop">
             <img
-              src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/56828017_850214761982793_7110731517202006016_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aN1vSefHQLwAX_R6gmk&_nc_ht=scontent.ftun16-1.fna&oh=00_AfCKiYkr9FkBZvpYAlXCJMztwOHZTcUCh4jtyoqVlMYutg&oe=649E4156"
+              src={url+"/uploads/"+user.image}
               alt=""
               className="userShowImg"
             />
@@ -217,9 +217,9 @@ const handleSubmit = async (e) => {
 
 <div className='userUpdateItem'>
   <label htmlFor="is_disabled">Status bracelet</label>
-  <select name="is_disabled" id="is_disabled" defaultValue={user.is_disabled ? user.is_disabled.toString() : ''} onChange={handleChange}>
-    <option value="false">Active</option>
-    <option value="true">Inactive</option>
+  <select name="is_disabled" id="is_disabled" onChange={handleChange}>
+    <option value="false" selected={!user.bracelets[0].is_disabled}>Active</option>
+    <option value="true" selected={user.bracelets[0].is_disabled}>Inactive</option>
   </select>
 </div>
 
