@@ -23,10 +23,11 @@ const handleDelete = async (id) => {
   try {
       const response = await axios({
           method: 'post',
-          url: `/deleteparent/${id}`, 
+          url: `/deleteparent`,
           headers: {
               'Content-Type': 'application/json'
-          }
+          },
+          data: { id }, // Pass id within an object
       });
 
       if (response.status === 200) {
@@ -38,6 +39,7 @@ const handleDelete = async (id) => {
       console.error("Error deleting user: ", error);
   }
 };
+
 
 
 // ... rest of your code
