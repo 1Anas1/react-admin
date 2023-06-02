@@ -144,7 +144,7 @@ chainInput.options = chainOptions;
       position,
       chain,
     } = formInputs;
-
+    console.log(formInputs);
     if (
       !name_shop ||
       !email ||

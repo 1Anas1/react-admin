@@ -21,14 +21,15 @@ const Datatable = ({member}) => {
 // Inside your Datatable component
 const handleDelete = async (id) => {
   try {
-      const response = await axios({
-          method: 'post',
-          url: `/deleteparent`,
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          data: { id }, // Pass id within an object
-      });
+    console.log(id)
+    const response = await axios.post("/deleteparent",{parentId:id} ,{
+      headers: {
+        'Content-Type': 'application/json',
+       
+      },
+      withCredentials: false,
+    });
+    
 
       if (response.status === 200) {
           setResult(result.filter((item) => item.idUser !== id));
