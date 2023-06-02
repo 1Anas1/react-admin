@@ -130,7 +130,7 @@ const handleSubmit = async (e) => {
                 className="userShowImg"
               />
               <div className="userShowTopTitle">
-                <span className="userShowUsername">Chaneb Tacos</span>
+                <span className="userShowUsername">{user.name_shop}</span>
                 <span className="userShowUserTitle">Shop</span>
               </div>
             </div>
@@ -147,7 +147,7 @@ const handleSubmit = async (e) => {
       type="text"
       placeholder="anass007"
       className="userUpdateInput"
-      value={data.name_shop || ''}
+      value={data.name_shop}
       onChange={(e) => setData({ ...data, name_shop: e.target.value })}
     />
                 </div>
@@ -157,7 +157,7 @@ const handleSubmit = async (e) => {
                     type="text"
                     placeholder="cherni anass"
                     className="userUpdateInput"
-                    value={data.email || ''}
+                    value={data.email}
       onChange={(e) => setData({ ...data, email: e.target.value })}
                   />
                 </div>
@@ -167,7 +167,7 @@ const handleSubmit = async (e) => {
                     type="text"
                     placeholder="cherni anass"
                     className="userUpdateInput"
-                    value={data.owner || ''}
+                    value={data.owner}
       onChange={(e) => setData({ ...data, owner: e.target.value })}
                   />
                 </div>
@@ -177,7 +177,7 @@ const handleSubmit = async (e) => {
                     type="text"
                     placeholder="cherni.anass02@gmail.com"
                     className="userUpdateInput"
-                    value={data.phone_number || ''}
+                    value={data.phone_number}
       onChange={(e) => setData({ ...data, phone_number: e.target.value })}
                   />
                 </div>
