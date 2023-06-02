@@ -30,25 +30,7 @@ const DatatableOrders = ({order}) => {
     setData(data.filter((item) => item.id !== id));
   };
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 180,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-          
-    
-            
-            <Link to={`/Orders/${params.row.idUser}`} style={{textDecoration:"none"}}>
-            <div className="EditButton">Edit</div>
-            </Link>
-          </div>
-        );
-      },
-    },
-  ];
+  
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -61,7 +43,7 @@ const DatatableOrders = ({order}) => {
       <DataGrid
       className="datagrid"
       rows={result}
-      columns={userColumns.concat(actionColumn)}
+      columns={userColumns}
       pageSize={9}
       rowsPerPageOptions={[9]}
       checkboxSelection

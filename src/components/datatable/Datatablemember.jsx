@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesourceprincipal";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
+import axios from "../../api/axios";
 
 const Datatablemember = ({member}) => {
   const [data, setData] = useState(userRows);
@@ -17,6 +18,7 @@ const Datatablemember = ({member}) => {
     statusbraclet :"",
 }]);
   const url = process.env.REACT_APP_URL;
+  const [message, setMessage] = useState("");
   useEffect(() => {
     if (member) {
       console.log(member)
@@ -41,9 +43,25 @@ const Datatablemember = ({member}) => {
     }
   }, [member, url]);
 
-  const handleDelete = (id) => {
+ 
+
+const handleDelete = async (id) => {
+  try {
+    const response = await axios.post(`/deletechild`, {
+      childId: id,
+      parentId: 'your_parent_id' // You need to determine how to get the parent ID
+    });
+
+    console.log(response.data.message);
     setData(data.filter((item) => item.id !== id));
-  };
+    setMessage(response.data.message); // Display the message returned by the server
+  } catch (error) {
+    console.error('Error:', error);
+    setMessage('Failed to delete member'); // Display an error message
+  }
+};
+
+
 
   const actionColumn = [
     {

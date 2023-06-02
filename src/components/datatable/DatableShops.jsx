@@ -1,5 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "../../api/axios";
 import { userColumns, userRows } from "../../sourceShops";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
@@ -9,6 +10,7 @@ const DatatableShops = ({shop}) => {
   const token = localStorage.getItem("accessToken");
   const role = localStorage.getItem('role');
   const isAdmin = role === 'admin';
+  const [message, setMessage] = useState("");
   const [result, setResult] = useState();
 useEffect(() => {
   if (shop) {
@@ -18,8 +20,8 @@ useEffect(() => {
       idUser:item._id,
       id: id++,
       nameshop: item.sp_name,
-      owner:"eya",
-      status: "active",
+      owner:item.owner.firstName,
+      status: item.payment_requirement,
       email: item.sp_email,
       remise:20,
       entryfee:20,
@@ -33,9 +35,28 @@ useEffect(() => {
   }
 }, [shop]);
 
-  const handleDelete = (id) => {
+const handleDelete = async (id) => {
+  try {
+    const response = await axios({
+      method: 'delete',
+      url: `/api/professional/deleteSellingPoint/${id}`,
+      headers: {
+        'Content-Type': 'application/json',
+        
+      }
+    });
+
+    console.log(response.data.message);
     setData(data.filter((item) => item.id !== id));
-  };
+    setMessage("Shop successfully deleted!");
+  } catch (error) {
+    console.error("Error:", error);
+
+    // Display error message
+    setMessage("An error occurred while deleting the shop.");
+  }
+};
+
 
   const actionColumn = [
     {
@@ -52,7 +73,7 @@ useEffect(() => {
               <>
                 <div
                   className="deleteButton"
-                  onClick={() => handleDelete(params.row.id)}
+                  onClick={() => handleDelete(params.row.idUser)}
                 >
                   Delete
                 </div>
@@ -60,7 +81,7 @@ useEffect(() => {
                   <div className="EditButton">Edit</div>
                 </Link>
               </>
-            )}
+            )}{message && <div className="message">{message}</div>}
           </div>
         );
       },

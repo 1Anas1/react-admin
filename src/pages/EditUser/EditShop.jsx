@@ -131,7 +131,7 @@ const handleSubmit = async (e) => {
                 className="userShowImg"
               />
               <div className="userShowTopTitle">
-                <span className="userShowUsername">{user.name_shop}</span>
+                <span className="userShowUsername">{data.name_shop}</span>
                 <span className="userShowUserTitle">Shop</span>
               </div>
             </div>
@@ -162,16 +162,7 @@ const handleSubmit = async (e) => {
       onChange={(e) => setData({ ...data, email: e.target.value })}
                   />
                 </div>
-                <div className="userUpdateItem">
-                  <label>Owner Email</label>
-                  <input
-                    type="text"
-                    placeholder="cherni anass"
-                    className="userUpdateInput"
-                    value={data.owner}
-      onChange={(e) => setData({ ...data, owner: e.target.value })}
-                  />
-                </div>
+              
                 <div className="userUpdateItem">
                   <label>Phone</label>
                   <input
@@ -208,14 +199,8 @@ const handleSubmit = async (e) => {
     <option value="inactive"selected={data.status_shop === 'inactive'}>Inactive</option>
   </select>
 </div>
-<div className='userUpdateItem'>
-<label for="chain">Chain</label>
-<select name="chain" id="gender" value={data.namechain || ''}  >
-  <option value="" disabled>Select gender</option>
-  <option ></option>
-</select>
-</div>
-<div>
+
+<div className="userupdatelocation">
                 <LocationInput setPosition={(pos) => psoi(pos)} />
               </div>
    
