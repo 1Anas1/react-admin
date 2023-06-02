@@ -53,7 +53,7 @@ const role =localStorage.getItem('role');
           },
           withCredentials: false,
         });
-  
+        console.log(response.data);
         setData({
           name_shop: response?.data.name_shop,
           email: response?.data.email,
@@ -89,9 +89,10 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-
+  data.id=userId;
+  console.log(data)
   try {
-    const response = await axios.put(`${url}/api/professional/editShop/${userId}`, data, {
+    const response = await axios.put(`/api/professional/editShop`, data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -115,7 +116,7 @@ const handleSubmit = async (e) => {
             <Sidebar/>
             <div className="usercontainer1">
                 <Navbar/>
-     
+                {!loading &&(<>
                 <div className="userTitleContainer">
         <h1 className="userTitle">Profile</h1>
         
@@ -226,7 +227,7 @@ const handleSubmit = async (e) => {
               </div>
             </form>
           </div>
-        </div>
+        </div></>)}
       </div>
       </div>
     
