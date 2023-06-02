@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "../../api/axios";
 
-const Datatablemember = ({member}) => {
+const Datatablemember = ({member,id}) => {
   const [data, setData] = useState(userRows);
   const [result, setResult] = useState([{
           
@@ -45,11 +45,11 @@ const Datatablemember = ({member}) => {
 
  
 
-const handleDelete = async (id) => {
+const handleDelete = async (id,id2) => {
   try {
     const response = await axios.post(`/deletechild`, {
       childId: id,
-      parentId: 'your_parent_id' // You need to determine how to get the parent ID
+      parentId: id2, // You need to determine how to get the parent ID
     });
 
     console.log(response.data.message);
@@ -76,7 +76,7 @@ const handleDelete = async (id) => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.idUser)}
+              onClick={() => handleDelete(params.row.idUser,id)}
             >
               Delete
             </div>

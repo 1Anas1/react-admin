@@ -88,7 +88,7 @@ const Single = () => {
         </div>
         <div className="bottom">
         <h1 className="title"></h1>
-          <Datatablemember member={member} />
+          <Datatablemember member={member} id={userId} />
         </div>
         <div className="bottom">
         <h1 className="title">Last Transactions</h1>

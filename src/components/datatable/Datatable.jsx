@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesourceprincipal";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
-
+import axios from "../../api/axios";
 const Datatable = ({member}) => {
   const [data, setData] = useState(userRows);
   const [result, setResult] = useState([{
@@ -15,9 +15,33 @@ const Datatable = ({member}) => {
     owner: "",
 }]);
   console.log(member,data)
-  const handleDelete = (id) => {
-    setData(member.filter((item) => item.id !== id));
-  };
+ // import axios at the top of your file
+
+
+// Inside your Datatable component
+const handleDelete = async (id) => {
+  try {
+      const response = await axios({
+          method: 'post',
+          url: `/deleteparent/${id}`, 
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+
+      if (response.status === 200) {
+          setResult(result.filter((item) => item.idUser !== id));
+      } else {
+          console.error("Error deleting user: ", response);
+      }
+  } catch (error) {
+      console.error("Error deleting user: ", error);
+  }
+};
+
+
+// ... rest of your code
+
   const url = process.env.REACT_APP_URL;
   useEffect(() => {
     if (member) {
@@ -55,7 +79,7 @@ const Datatable = ({member}) => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row.idUser)}
             >
               Delete
             </div>
