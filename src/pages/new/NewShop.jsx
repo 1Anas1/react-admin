@@ -133,7 +133,7 @@ chainInput.options = chainOptions;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const {
       name_shop,
       email,
@@ -144,7 +144,7 @@ chainInput.options = chainOptions;
       position,
       chain,
     } = formInputs;
-    console.log(formInputs);
+    
     if (
       !name_shop ||
       !email ||
@@ -159,27 +159,17 @@ chainInput.options = chainOptions;
       alert("All fields must be filled out");
       return;
     }
-
+  
     const emailRegex = /^\S+@\S+\.\S+$/;
     if (!emailRegex.test(email)) {
       alert("Email is not valid");
       return;
     }
-    console.log({
-      name_shop,
-      email,
-      phone_number,
-      location,
-      status_shop,
-      owner,
-      position,
-      chain,
-    });
-    // Here, you may need to replace 'accessToken' with the actual variable name where your access token is stored.
+  
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-
+  
     try {
       const response = await axios.post(
         "/api/professional/selling-point",
@@ -195,16 +185,22 @@ chainInput.options = chainOptions;
         },
         config
       );
+  
       if (response.status === 201) {
-        console.log("Response from server: ", response.data);
-        navigate("/"); // assuming "/" is your home route
+        alert("Form successfully submitted");
+        navigate("/products"); // assuming "/" is your home route
       }
       
     } catch (error) {
       console.error("Failed to submit form", error);
+      if (error.response) {
+        alert("Failed to submit form: " + error.response.data.error);
+      } else {
+        alert("Failed to submit form");
+      }
     }
   };
-
+  
 
   return (
     <div className="new">

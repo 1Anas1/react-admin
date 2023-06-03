@@ -180,6 +180,7 @@ const NewMember = ({ title }) => {
                 />
               </div>
 
+<<<<<<< HEAD
               {inputs.map((input) =>
                 input.type === "select" ? (
                   <div className="formInput" key={input.id}>
@@ -213,6 +214,17 @@ const NewMember = ({ title }) => {
               )}
 
               <button type="submit">Create</button>
+=======
+              {inputs.map((input) => (
+                <div className="formInput" key={input.id}>
+                  <label>{input.label}</label>
+                  <input type={input.type} placeholder={input.placeholder} />
+                </div>
+              ))}
+             
+              <button style={{ alignItems:'center',marginLeft:50}}>Create</button>
+              
+>>>>>>> abdc73d665df1a78401b30a1a852b76c307c828b
             </form>
             {formErrors["Image"] && <span className="error">{formErrors["Image"]}</span>}
           </div>

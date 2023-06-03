@@ -14,6 +14,7 @@ const Datatablemember = ({member,id}) => {
     lastname:"",
     img: "",
     email: "",
+    solde:"",
     statusaccount  : "",
     statusbraclet :"",
 }]);
@@ -27,14 +28,15 @@ const Datatablemember = ({member,id}) => {
       const updatedData = member.map((item) => {
         
         return {
-          idUser: item._id,
-          id: id++,
-          firstname: item.firstName,
-          lastname: item.lastName,
-          img: item.image ? url + "/uploads/" + item.image : "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-          email: item.email,
-          statusaccount: item.status === "true" ? "active" : "inactive",
-          statusbraclet: item.bracelets.length > 0 ? (item.bracelets[0].is_disabled ? "inactive" : "active") : "inactive"
+            idUser:item._id,
+            id: id++,
+            firstname: item.firstName,
+            lastname:item.lastName,
+            img: item.image ? url + "/uploads/" + item.image: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+            email: item.email,
+            solde:item.amount,
+            statusaccount  : item.status=== "true" ? "active": "inactive",
+            statusbraclet: item.bracelets.length > 0 ? (item.bracelets[0].is_disabled ? "inactive" : "active") : "inactive"
         };
       });
 
@@ -46,21 +48,21 @@ const Datatablemember = ({member,id}) => {
 
  
 
-const handleDelete = async (id,id2) => {
-  try {
-    const response = await axios.post(`/deletechild`, {
-      childId: id,
-      parentId: id2, // You need to determine how to get the parent ID
-    });
-
-    console.log(response.data.message);
-    setData(data.filter((item) => item.id !== id));
-    setMessage(response.data.message); // Display the message returned by the server
-  } catch (error) {
-    console.error('Error:', error);
-    setMessage('Failed to delete member'); // Display an error message
-  }
-};
+  const handleDelete = async (id, id2) => {
+    try {
+      const response = await axios.post(`/deletechild`, {
+        childId: id,
+        parentId: id2, // You need to determine how to get the parent ID
+      });
+  
+      alert(response.data.message);
+      setData(data.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to delete member');
+    }
+  };
+  
 
 
 

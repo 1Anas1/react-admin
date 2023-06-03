@@ -4,13 +4,14 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import axios from "../../api/axios";
+import { useNavigate  } from "react-router-dom";
 
 const New = ({ title }) => {
   const [file, setFile] = useState("");
   const [formInputs, setFormInputs] = useState({});
   const [selectedOption, setSelectedOption] = useState("");
   const [formErrors, setFormErrors] = useState({});
-
+  const navigate = useNavigate ();
   const inputs = [
     {
       id: 1,
@@ -122,6 +123,7 @@ const New = ({ title }) => {
     if (isValid) {
       if (!file) {
         setFormErrors({ ...formErrors, file: "Image is required" });
+        alert("Image is required");
       } else {
         try {
           const requestData = {
@@ -135,7 +137,6 @@ const New = ({ title }) => {
             status: formInputs["Status account"],
             image: file,
           };
-          console.log(requestData);
   
           const response = await axios.post("/SignupMemberAdmin", requestData, {
             headers: {
@@ -143,15 +144,22 @@ const New = ({ title }) => {
             },
           });
   
-          console.log("Form submitted");
-          console.log(response.data);
+          alert("Form submitted successfully.");
+          navigate("/users");
         } catch (error) {
           console.error(error);
-          // Handle error scenarios
+          if (error.response) {
+            alert("Failed to submit form: " + error.response.data.error);
+          } else {
+            alert("Failed to submit form.");
+          }
         }
       }
+    } else {
+      alert("Form validation failed.");
     }
   };
+  
   
 
   return (
@@ -225,7 +233,7 @@ const New = ({ title }) => {
                 )
               )}
 
-              <button type="submit">Create</button>
+              <button type="submit" style={{ alignItems:'center',marginLeft:50}}>Create</button>
             </form>
           </div>
         </div>

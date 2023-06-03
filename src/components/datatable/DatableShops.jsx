@@ -4,8 +4,10 @@ import axios from "../../api/axios";
 import { userColumns, userRows } from "../../sourceShops";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
+import { useNavigate  } from "react-router-dom";
 const url = process.env.REACT_APP_URL;
 const DatatableShops = ({shop}) => {
+  const navigate = useNavigate ();
   const [data, setData] = useState(userRows);
   const token = localStorage.getItem("accessToken");
   const role = localStorage.getItem('role');
@@ -42,20 +44,25 @@ const handleDelete = async (id) => {
       url: `/api/professional/deleteSellingPoint/${id}`,
       headers: {
         'Content-Type': 'application/json',
-        
-      }
+      },
     });
 
-    console.log(response.data.message);
+    alert(response.data.message);
     setData(data.filter((item) => item.id !== id));
-    setMessage("Shop successfully deleted!");
+    alert("Shop successfully deleted!");
+   
   } catch (error) {
     console.error("Error:", error);
 
     // Display error message
-    setMessage("An error occurred while deleting the shop.");
+    if (error.response) {
+      alert("An error occurred while deleting the shop: " + error.response.data.error);
+    } else {
+      alert("An error occurred while deleting the shop.");
+    }
   }
 };
+
 
 
   const actionColumn = [

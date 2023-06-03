@@ -26,13 +26,18 @@ const handleDelete = async (id) => {
       data: { chainId: id },
     });
 
-    console.log(response.data.message);
+    alert(response.data.message);
     setResult(result.filter((item) => item.idUser !== id));
   } catch (error) {
     console.error('Error:', error);
-    // Add any additional error handling logic here
+    if (error.response) {
+      alert("Error occurred while deleting chain: " + error.response.data.error);
+    } else {
+      alert("Error occurred while deleting chain");
+    }
   }
 };
+
 
   
  
