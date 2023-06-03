@@ -4,7 +4,7 @@ import { userColumns, userRows } from "../../sourceEmploye";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const DatatableEmploye= () => {
+const DatatableEmploye= ({idSellingPoint}) => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -40,7 +40,7 @@ const DatatableEmploye= () => {
     <div className="datatable">
       <div className="datatableTitle">
         Emplyees
-        <Link to="/products/newEmploye" className="link">
+        <Link to={`/products/${idSellingPoint}/newEmploye`} className="link">
           Add New Employee
         </Link>
       </div>

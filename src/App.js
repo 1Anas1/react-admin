@@ -58,11 +58,9 @@ function App() {
               <Route path="edit/:userId">
               <Route index element={<EditUser1/>}/>
               </Route>
-<<<<<<< HEAD
-              <Route path=":userId/newemp" element={<NewMember  title="Add New User" />}/>
-=======
-              <Route path="newemp" element={<NewMember inputs={userproInputs} title="Add New Principal" />}/>
->>>>>>> abdc73d665df1a78401b30a1a852b76c307c828b
+
+              <Route path=":userId/newemp" element={<NewMember  title="Add New Principal" />}/>
+
               </Route>
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
@@ -71,11 +69,9 @@ function App() {
               </Route>
             
             
-<<<<<<< HEAD
-              <Route path="new" element={<NewPro title="Add New User" />} />
-=======
-              <Route path="new" element={<NewPro inputs={userproInputs} title="Add New Client" />} />
->>>>>>> abdc73d665df1a78401b30a1a852b76c307c828b
+
+              <Route path="new" element={<NewPro title="Add New Client" />} />
+
               </Route>
               
               <Route
@@ -108,11 +104,11 @@ function App() {
                 element={<NewShop inputs={shopinput} title="Add New Shop" />}
               />
               <Route
-                path="newEmploye"
-                element={<NewEmploye inputs={EmpInputs} title="Add New Employee" />}
+                path=":idSellingPoint/newEmploye"
+                element={<NewEmploye title="Add New Employee" />}
               />
               <Route
-                path="singlemp"
+                path=":idSellingPoint/singlemp"
                 element={<SingleEmploye/>}
               />
             </Route>
@@ -167,7 +163,7 @@ function App() {
               />
               <Route
                 path="newEmploye"
-                element={<NewEmploye inputs={EmpInputs} title="Add New Product" />}
+                element={<NewEmploye title="Add New Product" />}
               />
               <Route
                 path="singlemp"

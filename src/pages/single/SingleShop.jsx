@@ -6,8 +6,9 @@ import Chart from "../../components/chart/Chart";
 import ListShops from "../../components/table/TransactionsShop";
 
 import DatatableEmploye from "../../components/datatable/DatableEmploye";
-
+import { useParams } from "react-router-dom";
 const SingleShop = () => {
+  const { productId } = useParams();
   return (
     <div className="single">
       <Sidebar />
@@ -44,7 +45,7 @@ const SingleShop = () => {
         </div>
         <div className="bottom">
         <h1 className="title"></h1>
-          <DatatableEmploye/>
+          <DatatableEmploye idSellingPoint={productId} />
         </div>
         <div className="bottom">
         <h1 className="title">Last Transactions</h1>
