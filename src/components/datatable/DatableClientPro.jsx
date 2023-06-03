@@ -24,6 +24,7 @@ const DatatableClientPro = ({pro}) => {
     if (pro) {
      let id=1;
      const updatedData = pro.map((item) => {
+      console.log(url + "/uploads/" + item.img)
       return {
           idUser:item.idUser,
           id: id++,
@@ -36,7 +37,7 @@ const DatatableClientPro = ({pro}) => {
       };
       
     })
-      
+      console.log(updatedData);
       setResult(updatedData);
       console.log("Component rendered with updated mapUser prop");
     }
@@ -103,7 +104,7 @@ const DatatableClientPro = ({pro}) => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={pro}
+        rows={result}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
