@@ -3,13 +3,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesourceChain";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
-
+import axios from "../../api/axios";
 const url = process.env.REACT_APP_URL;
 const DatatableChains = ({chain}) => {
   const [data, setData] = useState(userRows);
   const token = localStorage.getItem("accessToken");
   const role = localStorage.getItem('role');
   const isAdmin = role === 'admin';
+  const [message, setMessage] = useState("");
   const [result, setResult] = useState([{
           
     idUser:"",
@@ -19,9 +20,20 @@ const DatatableChains = ({chain}) => {
     owner: "",
 }]);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+const handleDelete = async (id) => {
+  try {
+    const response = await axios.delete(`/api/professional/deletechain`, {
+      data: { chainId: id },
+    });
+
+    console.log(response.data.message);
+    setResult(result.filter((item) => item.idUser !== id));
+  } catch (error) {
+    console.error('Error:', error);
+    // Add any additional error handling logic here
+  }
+};
+
   
  
   useEffect(() => {

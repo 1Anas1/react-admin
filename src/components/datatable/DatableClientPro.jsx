@@ -1,11 +1,14 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatblesourcePro";
-
+import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
+
 const DatatableClientPro = ({pro}) => {
   const [data, setData] = useState(userRows);
+  const [message, setMessage] = useState("");
+  const [serverMessage, setServerMessage] = useState(null);
   const [result, setResult] = useState([{
           
     idUser:"",
@@ -15,9 +18,7 @@ const DatatableClientPro = ({pro}) => {
     owner: "",
 }]);
   console.log(pro,data)
-  const handleDelete = (id) => {
-    setData(pro.filter((item) => item.id !== id));
-  };
+  
   const url = process.env.REACT_APP_URL;
   useEffect(() => {
     if (pro) {
@@ -42,6 +43,28 @@ const DatatableClientPro = ({pro}) => {
   }, [pro]);
 
  
+  const handleDelete = async (id) => {
+    try {
+      console.log("Deleting professional with id:", id);
+      const response = await axios.post(`/deletepro`, { proId: id });
+  
+      if (response.data.message) {
+        alert(response.data.message);
+      } else {
+        console.log("Server response:", response);
+      }
+  
+      const updatedResult = result.filter((item) => item.idUser !== id);
+      setResult(updatedResult);
+      console.log("Updated result:", updatedResult);
+    } catch (error) {
+      console.error('Error during deletion:', error.message);
+      if (error.response) {
+        alert(error.response.data.error);
+      }
+    }
+  };
+  
   
 
   const actionColumn = [
@@ -55,9 +78,10 @@ const DatatableClientPro = ({pro}) => {
             <Link to="/users/pro/view" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
+            
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row.idUser)}
             >
               Delete
             </div>
