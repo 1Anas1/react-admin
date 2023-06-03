@@ -4,8 +4,9 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState, useEffect } from "react";
 import axios from "../../api/axios";
-
+import { useNavigate  } from "react-router-dom";
 const NewChain = ({ inputs, title }) => {
+  const navigate = useNavigate ();
   const [selectedOption, setSelectedOptions] = useState("");
   const [ownerOptions, setOwnerOptions] = useState([]);
 
@@ -71,51 +72,57 @@ const NewChain = ({ inputs, title }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     // Perform input and file verification
     if (!formInputs["Chain name"]) {
-      setError("Please enter a chain name.");
+      alert("Please enter a chain name.");
       return;
     }
     if (!formInputs["Owner name"]) {
-      setError("Please select an owner name.");
+      alert("Please select an owner name.");
       return;
     }
     if (!file) {
-      setError("Please upload an image.");
+      alert("Please upload an image.");
       return;
     }
-
+  
     // Create the payload for the POST request
     const payload = {
       chain_name: formInputs["Chain name"],
       ownerId: formInputs["Owner name"],
       chain_image: file,
     };
-
+  
     // Make the POST request using Axios
     axios
       .post("/api/professional/createChain", payload) // Replace "/api/createChain" with your actual API endpoint
       .then((response) => {
         // Handle the successful response
-        console.log(response.data);
+        alert("Chain created successfully.");
+
         // Reset form inputs and file
         setFormInputs({});
         setFile("");
-        setError("");
+        navigate("/chains");
       })
+
       .catch((error) => {
         // Handle the error
         console.error(error);
-        setError("Failed to create chain. Please try again.");
+        alert("Failed to create chain. Please try again.");
       });
   };
+  
 
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
+        <div className="top">
+          <h1>{title}</h1>
+        </div>
         <div className="bottom">
           <div className="left">
             <img
@@ -171,7 +178,7 @@ const NewChain = ({ inputs, title }) => {
                 )
               )}
 
-              <button type="submit">Create</button>
+              <button type="submit" style={{ alignItems:'center',marginLeft:50}}>Create</button>
             </form>
           </div>
         </div>

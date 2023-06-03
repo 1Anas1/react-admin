@@ -58,7 +58,7 @@ function App() {
               <Route path="edit/:userId">
               <Route index element={<EditUser1/>}/>
               </Route>
-              <Route path="newemp" element={<NewMember inputs={userproInputs} title="Add New User" />}/>
+              <Route path="newemp" element={<NewMember inputs={userproInputs} title="Add New Principal" />}/>
               </Route>
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
@@ -67,12 +67,12 @@ function App() {
               </Route>
             
             
-              <Route path="new" element={<NewPro inputs={userproInputs} title="Add New User" />} />
+              <Route path="new" element={<NewPro inputs={userproInputs} title="Add New Client" />} />
               </Route>
               
               <Route
                 path="new"
-                element={<New  title="Add New User" />}
+                element={<New  title="Add New Principal" />}
               />
               
              
@@ -97,11 +97,11 @@ function App() {
               
               <Route
                 path="new"
-                element={<NewShop inputs={shopinput} title="Add New Product" />}
+                element={<NewShop inputs={shopinput} title="Add New Shop" />}
               />
               <Route
                 path="newEmploye"
-                element={<NewEmploye inputs={EmpInputs} title="Add New Product" />}
+                element={<NewEmploye inputs={EmpInputs} title="Add New Employee" />}
               />
               <Route
                 path="singlemp"
@@ -119,7 +119,7 @@ function App() {
               </Route>
               <Route
                 path="new"
-                element={<NewOrder title="Add New Product" />}
+                element={<NewOrder title="Add New Order" />}
               />
       
       
@@ -135,7 +135,7 @@ function App() {
               
               <Route
                 path="new"
-                element={<NewChain inputs={chaininput} title="Add New Product" />}
+                element={<NewChain inputs={chaininput} title="Add New Chain" />}
               />
                   
             </Route>

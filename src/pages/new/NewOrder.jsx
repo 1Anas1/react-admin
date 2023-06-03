@@ -2,10 +2,12 @@ import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 
+import { useNavigate  } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
 
 const NewOrder = ({ title }) => {
+  const navigate = useNavigate ();
   const [selectedOptions, setSelectedOptions] = useState({});
   const [userOptions, setUserOptions] = useState([]);
 
@@ -70,15 +72,15 @@ const NewOrder = ({ title }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formInputs = inputs.filter((input) => input.type !== "select");
     const formValues = {};
-
+  
     formInputs.forEach((input) => {
       const inputValue = e.target.elements[input.name].value;
       formValues[input.name] = inputValue;
     });
-
+  
     const selectedOptionsObj = inputs.reduce((obj, input) => {
       if (input.type === "select") {
         const selectedValue = selectedOptions[input.id];
@@ -86,25 +88,28 @@ const NewOrder = ({ title }) => {
       }
       return obj;
     }, {});
-
+  
     const requestData = {
       ...formValues,
       ...selectedOptionsObj,
     };
-    console.log(requestData);
+  
     try {
       const response = await axios.post("/createBraceletAdmin", requestData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log("Bracelet created successfully:", response.data);
+      alert("Bracelet created successfully!");
+      navigate("/Orders");
     } catch (error) {
       console.error("Error creating bracelet:", error);
+      alert("Error creating bracelet: " + (error.response && error.response.data.error ? error.response.data.error : ""));
     }
-
+  
     setSelectedOptions({});
   };
+  
 
   return (
     <div className="new">

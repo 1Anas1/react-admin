@@ -4,9 +4,10 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "../../api/axios";
-
+import { useNavigate  } from "react-router-dom";
 const NewPro = ({ title }) => {
   const [file, setFile] = useState(null);
+  const navigate = useNavigate ();
   const [formInputs, setFormInputs] = useState({});
   const [selectedOption, setSelectedOption] = useState("");
   const [formErrors, setFormErrors] = useState({});
@@ -115,7 +116,7 @@ const NewPro = ({ title }) => {
         const reader = new FileReader();
         reader.onloadend = async function () {
           const base64Image = reader.result;
-
+  
           const requestData = {
             firstName: formInputs["First name"],
             lastName: formInputs["Last name"],
@@ -127,27 +128,32 @@ const NewPro = ({ title }) => {
             status: formInputs["Status account"],
             image: base64Image,
           };
-
-          console.log(requestData);
-
+  
           // Make the API request with the updated requestData
           const response = await axios.post("/proSignupAdmin", requestData, {
             headers: {
               "Content-Type": "application/json",
             },
           });
-
-          console.log("Form submitted");
-          console.log(response.data);
+  
+          alert("Form submitted successfully.");
+          navigate("/users");
         };
-
+  
         reader.readAsDataURL(file);
       } catch (error) {
         console.error(error);
-        // Handle error scenarios
+        if (error.response) {
+          alert("Failed to submit form: " + error.response.data.error);
+        } else {
+          alert("Failed to submit form.");
+        }
       }
+    } else {
+      alert("Form validation failed.");
     }
   };
+  
 
   return (
     <div className="new">
@@ -210,7 +216,7 @@ const NewPro = ({ title }) => {
                 )
               )}
 
-              <button type="submit">Create</button>
+              <button type="submit" style={{ alignItems:'center',marginLeft:50}}>Create</button>
             </form>
             {formErrors["Image"] && <span className="error">{formErrors["Image"]}</span>}
           </div>

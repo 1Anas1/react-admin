@@ -49,7 +49,7 @@ const NewMember = ({ inputs, title }) => {
                 </div>
               ))}
              
-              <button>Create</button>
+              <button style={{ alignItems:'center',marginLeft:50}}>Create</button>
               
             </form>
           </div>

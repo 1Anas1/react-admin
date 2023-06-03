@@ -21,23 +21,28 @@ const Datatable = ({member}) => {
 // Inside your Datatable component
 const handleDelete = async (id) => {
   try {
-    console.log(id)
-    const response = await axios.post("/deleteparent",{parentId:id} ,{
+    console.log(id);
+    const response = await axios.post("/deleteparent", {parentId: id}, {
       headers: {
         'Content-Type': 'application/json',
-       
       },
       withCredentials: false,
     });
-    
 
-      if (response.status === 200) {
-          setResult(result.filter((item) => item.idUser !== id));
-      } else {
-          console.error("Error deleting user: ", response);
-      }
+    if (response.status === 200) {
+      setResult(result.filter((item) => item.idUser !== id));
+      alert("User successfully deleted");
+    } else {
+      console.error("Error deleting user: ", response);
+      alert("Error occurred while deleting user: " + response.statusText);
+    }
   } catch (error) {
-      console.error("Error deleting user: ", error);
+    console.error("Error deleting user: ", error);
+    if (error.response) {
+      alert("Error occurred while deleting user: " + error.response.data.error);
+    } else {
+      alert("Error occurred while deleting user");
+    }
   }
 };
 
@@ -57,6 +62,7 @@ const handleDelete = async (id) => {
           lastname:item.firstname,
           img: item.img ? url + "/uploads/" + item.img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
           email: item.email ,
+          solde:item.amount,
           statusaccount:item.statusaccount,
           statusbraclet :item.statusbraclet
       };
