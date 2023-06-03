@@ -10,6 +10,7 @@ const NewOrder = ({ title }) => {
   const [userOptions, setUserOptions] = useState([]);
 
   useEffect(() => {
+    console.log('hhhh');
     const getUsersWithoutBracelets = async () => {
       try {
         const response = await axios.get("/getUsersWithoutBracelets");
@@ -19,7 +20,7 @@ const NewOrder = ({ title }) => {
           value: user._id,
           label: user.email,
         }));
-
+        console.log(options)
         setUserOptions(options);
       } catch (error) {
         console.error("Error fetching users:", error);

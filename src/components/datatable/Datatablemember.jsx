@@ -25,15 +25,16 @@ const Datatablemember = ({member,id}) => {
       console.log(typeof member)
      let id=1;
       const updatedData = member.map((item) => {
+        
         return {
-            idUser:item._id,
-            id: id++,
-            firstname: item.firstName,
-            lastname:item.lastName,
-            img: item.image ? url + "/uploads/" + item.image: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-            email: item.email,
-            statusaccount  : item.status=== "true" ? "active": "inactive",
-            statusbraclet :item.bracelets[0].is_disabled? "active":"inactive",
+          idUser: item._id,
+          id: id++,
+          firstname: item.firstName,
+          lastname: item.lastName,
+          img: item.image ? url + "/uploads/" + item.image : "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+          email: item.email,
+          statusaccount: item.status === "true" ? "active" : "inactive",
+          statusbraclet: item.bracelets.length > 0 ? (item.bracelets[0].is_disabled ? "inactive" : "active") : "inactive"
         };
       });
 
@@ -92,7 +93,7 @@ const handleDelete = async (id,id2) => {
     <div className="datatable">
       <div className="datatableTitle">
       Members
-        <Link to="/users/member/newemp" className="link">
+        <Link to={`/users/member/${id}/newemp`} className="link">
           Add New Member
         </Link>
       </div>

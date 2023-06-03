@@ -58,7 +58,7 @@ function App() {
               <Route path="edit/:userId">
               <Route index element={<EditUser1/>}/>
               </Route>
-              <Route path="newemp" element={<NewMember inputs={userproInputs} title="Add New User" />}/>
+              <Route path=":userId/newemp" element={<NewMember  title="Add New User" />}/>
               </Route>
               <Route path="pro">
               <Route path=":userId" element={<SingleClientPro />} />
@@ -67,7 +67,7 @@ function App() {
               </Route>
             
             
-              <Route path="new" element={<NewPro inputs={userproInputs} title="Add New User" />} />
+              <Route path="new" element={<NewPro title="Add New User" />} />
               </Route>
               
               <Route
