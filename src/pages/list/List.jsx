@@ -14,7 +14,7 @@ const List = () => {
     lastname:"",
     img: "",
     email: "",
-    
+    solde:"",
     statusaccount  : "",
     statusbraclet :""
   }]);

@@ -5,7 +5,7 @@ export const chaininput = [
         id: 1,
         label: "Chain name",
         type: "text",
-        placeholder: "John Doe",
+       
       },
    
     {
