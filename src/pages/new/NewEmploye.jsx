@@ -68,7 +68,8 @@ const NewEmploye = ({ title }) => {
     let errors = {};
     for (const input of inputs) {
       if (!formInputs[input.label]) {
-        errors[input.label] = `${input.label} is required`;
+        console.log(input.label ,formInputs[input.label])
+        errors[input.label] = `${input.label} r is required`;
       } else if (input.type === "email" && !validateEmail(formInputs[input.label])) {
         errors[input.label] = "Invalid email address";
       }
@@ -76,9 +77,7 @@ const NewEmploye = ({ title }) => {
     if (!file) {
       errors["Image"] = "Image is required";
     }
-    if (selectedOption === "") {
-      errors["Role"] = "Role is required";
-    }
+    
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -169,8 +168,8 @@ const NewEmploye = ({ title }) => {
       <label>{input.label}</label>
       <select
         name={input.label}
-        value={selectedOption} // Use selectedOption instead of formInputs[input.label]
-        onChange={handleOptionChange}
+        value={formInputs[input.label] || ""} // Use selectedOption instead of formInputs[input.label]
+        onChange={handleInputChange}
       >
         {input.options.map((option) => (
           <option key={option.value} value={option.value}>
