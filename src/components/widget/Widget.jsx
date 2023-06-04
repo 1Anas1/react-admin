@@ -5,20 +5,62 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
+import React, { useEffect, useState } from 'react';
+import axios from "../../api/axios";
 const Widget = ({ type }) => {
   let data;
 
+  // Define state variables
+  const [amount, setAmount] = useState(0);
+
+
+  useEffect(() => {
+    // Define a function that fetches the data from the server
+    async function fetchData() {
+      try {
+        let response;
+
+        switch (type) {
+          case 'user':
+            response = await axios.get('http://127.0.0.1:8003/getTotalMemberCount'); 
+            break;
+          case 'order':
+            response = await axios.get('http://127.0.0.1:8003/getTotalBraceletCount');
+            break;
+          case 'Member':
+            response = await axios.get('http://127.0.0.1:8003/getTotalChildCount');
+            break;
+          case 'professional client':
+            response = await axios.get('http://127.0.0.1:8003/getTotalProCount');
+            break;
+          //... rest of your cases ...
+          default:
+            break;
+        }
+      
+        if(response.status === 200) {
+          const count = response.data;
+          setAmount(count);
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    }
+
+    // Call the function to fetch the data
+    fetchData();
+  }, [type]);
   //temporary
-  const amount = 100;
+ 
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
         title: "USERS",
-        amount:25,
+        amount:amount,
         isMoney: false,
-        link: "View all users",
+        
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -34,8 +76,8 @@ const Widget = ({ type }) => {
       data = {
         title: "ORDERS",
         isMoney: false,
-        amount:10,
-        link: "View all orders",
+        amount:amount,
+        
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -51,8 +93,8 @@ const Widget = ({ type }) => {
       data = {
         title: "MEMBERS",
         isMoney: false,
-        amount:5,
-        link: "View all members",
+        amount:amount,
+        
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -65,8 +107,8 @@ const Widget = ({ type }) => {
       data = {
         title: "PROFESSIONAL CLIENT",
         isMoney: false,
-        amount:2,
-        link: "View all professional client",
+        amount:amount,
+       
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -82,7 +124,7 @@ const Widget = ({ type }) => {
         data = {
           title: "PAYMENT",
           isMoney: false,
-          amount:5,
+          amount:amount,
           link: "See details",
           icon: (
             <MonetizationOnOutlinedIcon

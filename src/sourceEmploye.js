@@ -19,8 +19,8 @@ export const userColumns = [
       width: 230,
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "role",
+      headerName: "Role",
       width: 100,
     },
     {

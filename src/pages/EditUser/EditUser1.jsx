@@ -31,6 +31,7 @@ const [data, setData] = useState({
   phone:"",
   gender:"",
   birthDate:"",
+  password:"",
   statusaccount  : "",
   statusBraclet :"",
   is_disabled:"",
@@ -75,6 +76,7 @@ useEffect(() => {
         phone: response?.data.user.phone,
         birthDate: response?.data.user.birthDate,
         gender: response?.data.user.gender,
+       
         is_disabled: response?.data.user.is_disabled,
        statusBracelet: response?.data.user.bracelets[0] ?response?.data.user.bracelets[0].status:null,
       });
@@ -224,6 +226,7 @@ const handleSubmit = async (e) => {
                   className="userUpdateInput"
                 />
               </div>
+             
               <div className="userUpdateItem">
                 <label>Phone</label>
                 <input

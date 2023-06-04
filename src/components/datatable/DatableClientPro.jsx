@@ -76,7 +76,8 @@ const DatatableClientPro = ({pro}) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/pro/view" style={{ textDecoration: "none" }}>
+           
+            <Link  to={`/users/pro/${params.row.idUser}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             

@@ -13,7 +13,7 @@ const DatatableEmploye= ({emp,idSellingPoint}) => {
     img: "",
     status: "",
     email: "",
-    age: 35,
+    role:"",
   },]);
   const url = process.env.REACT_APP_URL;
   const [message, setMessage] = useState("");
@@ -32,7 +32,7 @@ const DatatableEmploye= ({emp,idSellingPoint}) => {
             img: item.image ? url + "/uploads/" + item.image: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
             status:  item.status=== "true" ? "active": "inactive",
             email: item.email,
-            age: 35,
+            role:item.roleEmp,
           
             };
       });
@@ -44,9 +44,27 @@ const DatatableEmploye= ({emp,idSellingPoint}) => {
   }, [emp, url]);
 
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (idUser) => {
+    try {
+      // Make DELETE request to backend
+      const response = await axios.post(`/deleteEmp`, { userId: idUser }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      // If successful, filter out the deleted user from local state
+      if (response.status === 200) {
+        setResult(result.filter((item) => item.idUser !== idUser));
+        alert('Employee deleted successfully');
+      }
+    } catch (error) {
+      // Handle errors here
+      alert('An error occurred: ' + error);
+    }
   };
+  
+
 
   const actionColumn = [
     {
@@ -56,16 +74,14 @@ const DatatableEmploye= ({emp,idSellingPoint}) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/products/shop/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
+            
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row.idUser)}
             >
               Delete
             </div>
-            <Link  to="/products/shop/employe/edit/test" style={{textDecoration:"none"}}>
+            <Link  to={`/products/shop/employe/edit/${params.row.idUser}`} style={{textDecoration:"none"}}>
             <div className="EditButton">Edit</div>
             </Link>
           </div>

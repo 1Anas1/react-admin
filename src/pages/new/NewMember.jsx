@@ -104,7 +104,6 @@ const NewMember = ({ title }) => {
       }));
     };
     
-  
     const handleSubmit = async (e) => {
       e.preventDefault();
       const isValid = validateForm();
@@ -127,8 +126,6 @@ const NewMember = ({ title }) => {
               image: base64Image,
             };
     
-            console.log(requestData);
-    
             // Make the API request with the updated requestData
             const response = await axios.post("/childSignupAdmin", requestData, {
               headers: {
@@ -136,17 +133,23 @@ const NewMember = ({ title }) => {
               },
             });
     
-            console.log("Form submitted");
-            console.log(response.data);
+            if (response.status === 201) {
+              alert("Form submitted successfully");
+            } else {
+              alert(`Error occurred while submitting form: ${response.statusText}`);
+            }
           };
     
           reader.readAsDataURL(file);
         } catch (error) {
           console.error(error);
-          // Handle error scenarios
+          alert(`Error occurred: ${error.message}`);
         }
+      } else {
+        alert("Form validation failed. Please make sure all fields are correctly filled out.");
       }
     };
+    
     
 
 

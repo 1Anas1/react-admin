@@ -75,7 +75,7 @@ const Single = () => {
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
-                  <span className="itemValue">+1 2345 67 89</span>
+                  <span className="itemValue">{user.phone}</span>
                 </div>
                
                

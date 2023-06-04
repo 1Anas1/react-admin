@@ -2,9 +2,44 @@ import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
-
+import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "../../api/axios";
+import DatatableShops from "../../components/datatable/DatableShops";
 import DatatableClientPro from "../../components/datatable/DatableClientPro";
 const SingleClientPro = () => {
+  const [loading, setLoading] = useState(true);
+  const [user,setUser]=useState({});
+  const [operation,setOperation]=useState([]);
+  const token = localStorage.getItem("accessToken");
+  const { userId } = useParams();
+  const url = process.env.REACT_APP_URL;
+  useEffect(() => {
+    console.log(userId);
+    async function fetchData() {
+      try {
+        const response = await axios.post("/getUserInfo",{idUser:userId}, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response?.data.user);
+        setUser(response?.data.user);
+        setOperation(response?.data.user.bracelets[0].operations)
+        
+        
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+
+    fetchData();
+  }, [token, userId]);
   return (
     <div className="single">
       <Sidebar />
@@ -16,19 +51,19 @@ const SingleClientPro = () => {
             <h1 className="title">Information</h1>
             <div className="item">
               <img
-                src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+               src={url + "/uploads/" + user.image}
                 alt=""
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{user.lastName} {user.firstName}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemValue">{user.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
-                  <span className="itemValue">+1 2345 67 89</span>
+                  <span className="itemValue">{user.phone}</span>
                 </div>
                
                
@@ -39,7 +74,10 @@ const SingleClientPro = () => {
             <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
           </div>
         </div>
-       
+        <div className="bottom">
+        <h1 className="title">Last Transactions</h1>
+          <DatatableShops/>
+        </div>
       </div>
     </div>
   );
