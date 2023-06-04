@@ -34,7 +34,7 @@ const Datatablemember = ({member,id}) => {
             lastname:item.lastName,
             img: item.image ? url + "/uploads/" + item.image: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
             email: item.email,
-            solde:item.bracelets[0].amount,
+            solde:item.bracelets.length > 0 ?item.bracelets[0].amount:0,
             statusaccount  : item.status=== "true" ? "active": "inactive",
             statusbraclet: item.bracelets.length > 0 ? (item.bracelets[0].is_disabled ? "inactive" : "active") : "inactive"
         };
