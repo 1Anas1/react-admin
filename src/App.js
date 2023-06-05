@@ -156,15 +156,23 @@ function App() {
               <Route index element={<ListShops />} />
               <Route path="shop">
               <Route path=":productId" element={<SingleShop />} />
+              <Route path="edit/:userId">
+              <Route index element={<EditShop/>}/>
+              </Route>
+              <Route path="employe">
+              <Route path="edit/:userId">
+              <Route index element={<EditEmpo/>}/></Route>
+              </Route>
               </Route>
               <Route
                 path="new"
                 element={<NewShop title="Add New Product" />}
               />
-              <Route
-                path="newEmploye"
-                element={<NewEmploye title="Add New Product" />}
+               <Route
+                path=":idSellingPoint/newEmploye"
+                element={<NewEmploye title="Add New Employee" />}
               />
+             
               <Route
                 path="singlemp"
                 element={<SingleEmploye/>}

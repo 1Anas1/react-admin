@@ -76,6 +76,9 @@ const handleDelete = async (id) => {
             <Link to={`/products/shop/${params.row.idUser}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
+            <Link to={`/products/shop/edit/${params.row.idUser}`} style={{ textDecoration: "none" }}>
+                  <div className="EditButton">Edit</div>
+                </Link>
             {isAdmin && ( // Show "Delete" and "Edit" buttons only for the admin
               <>
                 <div
@@ -84,9 +87,7 @@ const handleDelete = async (id) => {
                 >
                   Delete
                 </div>
-                <Link to={`/products/shop/edit/${params.row.idUser}`} style={{ textDecoration: "none" }}>
-                  <div className="EditButton">Edit</div>
-                </Link>
+                
               </>
             )}{message && <div className="message">{message}</div>}
           </div>
