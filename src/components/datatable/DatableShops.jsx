@@ -22,7 +22,7 @@ useEffect(() => {
       idUser:item._id,
       id: id++,
       nameshop: item.sp_name,
-      owner:item.owner.firstName,
+      owner:item.owner.firstName +"  "+item.owner.lastName,
       status: item.payment_requirement,
       email: item.sp_email,
       remise:20,

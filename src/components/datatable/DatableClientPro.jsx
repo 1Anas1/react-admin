@@ -29,7 +29,7 @@ const DatatableClientPro = ({pro}) => {
           idUser:item.idUser,
           id: id++,
           firstname: item.firstname,
-          lastname:item.firstname,
+          lastname:item.lastname,
           img: item.img ? url + "/uploads/" + item.img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
           email: item.email ,
           statusaccount:item.statusaccount,

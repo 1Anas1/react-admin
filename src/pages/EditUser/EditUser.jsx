@@ -154,9 +154,41 @@ const handleSubmit = async (e) => {
       
     </div>
       <div className="userContainer">
-          
+     
         <div className="userShow">
+        {role === 'admin' && ( // Afficher les champs spécifiques à l'administrateur
+                      <>
           <div className="userShowTop">
+            <img
+              src={url+"/uploads/"+user.image}
+              alt=""
+              className="userShowImg"
+            />
+            <div className="userShowTopTitle">
+              <span className="userShowUsername">{user.firstName}</span>
+              <span className="userShowUserTitle">{role} Users</span>
+            </div>
+          </div>
+          <div className="userShowBottom">
+            <span className="userShowTitle">Account Details</span>
+            <div className="userShowInfo">
+              <PermIdentity className="userShowIcon" />
+              <span className="userShowInfoTitle">{user.firstName} {user.lastName}</span>
+            </div>
+           
+            <span className="userShowTitle">Contact Details</span>
+            
+            <div className="userShowInfo">
+              <MailOutline className="userShowIcon" />
+              <span className="userShowInfoTitle">{user.email}</span>
+            </div>
+           
+          </div>
+          </>
+                    )}
+                    {role === 'professional' && ( // Afficher les champs spécifiques aux professionnels
+                      <>
+                         <div className="userShowTop">
             <img
               src={url+"/uploads/"+user.image}
               alt=""
@@ -188,12 +220,59 @@ const handleSubmit = async (e) => {
             </div>
            
           </div>
+                      </>
+                    )}
         </div>
+        
         <div className="userUpdate">
+          
           <span className="userUpdateTitle">Edit</span>
           <form className="userUpdateForm" onSubmit={handleSubmit}>
             <div className="userUpdateLeft">
+            {role === 'admin' && ( // Afficher les champs spécifiques à l'administrateur
+                      <>
               <div className="userUpdateItem">
+                <label>First name</label>
+                <input
+                  type="text"
+                  value={data.firstName}
+                  onChange={e => setData({...data, firstName: e.target.value})}
+                  className="userUpdateInput"
+                />
+              </div>
+              <div className="userUpdateItem">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  value={data.lastName}
+                  onChange={e => setData({...data, lastName: e.target.value})}
+                  className="userUpdateInput"
+                />
+              </div>
+              <div className="userUpdateItem">
+                <label>Email</label>
+                <input
+                  type="text"
+                  value={data.email}
+                  onChange={e => setData({...data, email: e.target.value})}
+                  className="userUpdateInput"
+                />
+              </div>
+              
+             
+              
+
+
+  
+
+
+
+ 
+  </>
+                    )}
+                    {role === 'professional' && ( // Afficher les champs spécifiques aux professionnels
+                      <>
+                        <div className="userUpdateItem">
                 <label>First name</label>
                 <input
                   type="text"
@@ -246,13 +325,9 @@ const handleSubmit = async (e) => {
 </select>
 </div>
 
+                      </>
+                    )}
 
-  
-
-
-
- 
-  
             </div>
             <div className="userUpdateRight">
                       {formErrors["Image"] && (

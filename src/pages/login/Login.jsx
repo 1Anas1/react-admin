@@ -69,7 +69,9 @@ const Login = () => {
               } else if (err.response?.status === 400) {
                 setErrMsg('Missing username or password');
               } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('Incorrect email or password');
+              } else if (err.response?.status === 404) {
+                setErrMsg('User not found'); // Ajoutez un message d'erreur spécifique pour l'erreur 404
               } else {
                 setErrMsg('Login failed');
               }
@@ -94,6 +96,7 @@ const Login = () => {
         <Link to="/Home" style={{ textDecoration: "none" }}>
     <div className="login-btn" onClick={handleSubmit}>Sign in</div>
     </Link>
+    {errMsg && <p className="error-message">{errMsg}</p>}
     <div className={popupStyle}>
 
         <h3>Login Failed</h3>

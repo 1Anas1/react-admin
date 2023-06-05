@@ -10,7 +10,7 @@ const Featured = () => {
   const [transferPercentage, setTransferPercentage] = useState(0);
   const [totalTransfers, setTotalTransfers] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  const role =localStorage.getItem('role');
   useEffect(() => {
     const getTransferPercentage = async () => {
       try {
@@ -32,26 +32,37 @@ const Featured = () => {
 
   return (
     <div className="featured">
-      {isLoading ? ( // Vérifiez si isLoading est true
-      <p>Loading...</p> // Affichez un message de chargement ou un composant de chargement
-    ) : (
-      <div>
-        <div className="top">
-          <h1 className="title">Total Revenue</h1>
-          <MoreVertIcon fontSize="small" />
-        </div>
-        <div className="bottom">
-          <div className="featuredChart">
-            {console.log(transferPercentage, 'test')}
-            <CircularProgressbar value={transferPercentage} text={`${transferPercentage}%`} strokeWidth={5} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+        
+          {role === 'admin' && (
+            <>
+              <div className="top">
+            <h1 className="title">Total Revenue</h1>
+            <MoreVertIcon fontSize="small" />
           </div>
-          <p className="title">Total transfers made</p>
-          <p className="amount">{totalTransfers}</p>
+              <div className="bottom">
+                <div className="featuredChart">
+                  {console.log(transferPercentage, 'test')}
+                  <CircularProgressbar value={transferPercentage} text={`${transferPercentage}%`} strokeWidth={5} />
+                </div>
+                <p className="title">Total transfers made</p>
+                <p className="amount">{totalTransfers}</p>
+              </div>
+            </>
+          )}
+          {role === 'professional' && (
+            <>
+              {/* Add specific fields for professionals */}
+            </>
+          )}
         </div>
-      </div>
-    )}
+      )}
     </div>
   );
+  
 };
 
 export default Featured;
