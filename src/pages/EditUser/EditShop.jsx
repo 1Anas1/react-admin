@@ -125,11 +125,7 @@ const handleSubmit = async (e) => {
             
           <div className="userShowEdit">
             <div className="userShowTop">
-              <img
-                src="https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/56828017_850214761982793_7110731517202006016_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aN1vSefHQLwAX_R6gmk&_nc_ht=scontent.ftun16-1.fna&oh=00_AfCKiYkr9FkBZvpYAlXCJMztwOHZTcUCh4jtyoqVlMYutg&oe=649E4156"
-                alt=""
-                className="userShowImg"
-              />
+             
               <div className="userShowTopTitle">
                 <span className="userShowUsername">{data.name_shop}</span>
                 <span className="userShowUserTitle">Shop</span>

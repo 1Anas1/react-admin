@@ -12,7 +12,7 @@ const Widget = ({ type }) => {
 
   // Define state variables
   const [amount, setAmount] = useState(0);
-
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     // Define a function that fetches the data from the server
@@ -33,12 +33,42 @@ const Widget = ({ type }) => {
           case 'professional client':
             response = await axios.get('http://127.0.0.1:8003/getTotalProCount');
             break;
-          //... rest of your cases ...
+            case 'shops':
+             response = await axios.get(`/calculateSellingPointCountByOwner`, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`,
+                },
+                withCredentials: false,
+              });
+              
+              
+          
+        
+            
+              
+              break;
+              case 'chain':
+                response = await axios.get(`/calculateChainCountByOwner`, {
+                   headers: {
+                     'Content-Type': 'application/json',
+                     Authorization: `Bearer ${token}`,
+                   },
+                   withCredentials: false,
+                 });
+                 
+                 
+             
+           
+               
+                 
+                 break;
           default:
             break;
         }
       
         if(response.status === 200) {
+          
           const count = response.data;
           setAmount(count);
         }
@@ -120,12 +150,13 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-      case "payment":
+      case "chain":
+        
         data = {
-          title: "PAYMENT",
+          title: "Chain",
           isMoney: false,
           amount:amount,
-          link: "See details",
+          
           icon: (
             <MonetizationOnOutlinedIcon
               className="icon"
@@ -137,6 +168,24 @@ const Widget = ({ type }) => {
           ),
         };
         break;
+        case "shops":
+          
+          data = {
+            title: "Shops",
+            isMoney: false,
+            amount:amount,
+            
+            icon: (
+              <MonetizationOnOutlinedIcon
+                className="icon"
+                style={{
+                  backgroundColor: "rgba(128, 0, 128, 0.2)",
+                  color: "purple",
+                }}
+              />
+            ),
+          };
+          break;
     default:
       break;
   }

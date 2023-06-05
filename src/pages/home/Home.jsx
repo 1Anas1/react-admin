@@ -91,8 +91,8 @@ const [loading, setLoading] = useState(true);
           )}
           {isProfessional && ( 
                <>
-            <Widget type="user" />
-            <Widget type="payment" /></>
+            <Widget type="shops" />
+            <Widget type="chain" /></>
           )}
         </div>
       <div className="charts">
