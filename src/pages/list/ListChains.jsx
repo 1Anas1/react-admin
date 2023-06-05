@@ -17,10 +17,11 @@ const ListChains = () => {
   
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("accessToken");
-
+  const role =localStorage.getItem('role');
 
 
   useEffect(() => {
+    if(role==="admin"){
     async function fetchData() {
       try {
         const response = await axios.get(LOGIN_URL, {
@@ -41,7 +42,29 @@ const ListChains = () => {
       }
     }
 
-    fetchData();
+    fetchData();}else{
+      async function fetchData() {
+        try {
+          const response = await axios.get('/getCainByUserId', {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: false,
+          });
+          console.log(response?.data.chains)
+          setData(response?.data.chains);
+          
+          setLoading(false);
+        } catch (err) {
+          if (!err?.response) {
+            console.log('No server response');
+          }
+        }
+      }
+  
+      fetchData();
+    }
   }, [token]);
   return (
     <div className="list">

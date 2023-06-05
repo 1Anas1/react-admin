@@ -36,7 +36,7 @@ const ListShops = () => {
             },
             withCredentials: false,
           });
-          console.log(response?.data)
+          console.log(response?.data);
           setData(response?.data);
           
           setLoading(false);
@@ -50,37 +50,44 @@ const ListShops = () => {
       fetchData()
     }
     
-    else {  async function fetchData() {
-      try {
-        const token = localStorage.getItem("accessToken");
-        console.log(token);
-        const response = await axios.post('/getSellingPointsByUserId',{
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          withCredentials: false,
-        });
-        console.log(response?.data)
-        const transformedData = response?.data.sellingPoints.map((sellingPoint) => ({
-          idUser: sellingPoint.ownerId._id,
-          id: sellingPoint.sellingPointId,
-          chainname: sellingPoint.chainId ? sellingPoint.chainId.chain_name : '',
-          img: sellingPoint.sellingPointImage,
-          owner: `${sellingPoint.ownerId.firstName} ${sellingPoint.ownerId.lastName}`,
-        }));
-        setData(transformedData);
+    else {
+      async function fetchData() {
+        try {
+          console.log(token);
+          const response = await axios.get(`/getSellingPointsByUserId`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: false,
+          });
+          console.log(response?.data)
+      const transformedData = response?.data.sellingPoints.map((sellingPoint) => ({
+        idUser: sellingPoint.ownerId._id,
+        _id: sellingPoint.sellingPointId,
+        sp_email:sellingPoint.sellingPointEmail,
+        sp_name:sellingPoint.sellingPointName,
+        owner:{firstName:sellingPoint.ownerId.firstName,lastName:sellingPoint.ownerId.lastName,},
+        sp_phone:sellingPoint.sellingPointPhone,
+        sp_address:sellingPoint.sellingPointAddress,
+        payment_requirement:sellingPoint.paymentRequirement,
+        chainname: sellingPoint.chainId ? sellingPoint.chainId.chain_name : '',
+        img: sellingPoint.sellingPointImage,
         
-        setLoading(false);
-      } catch (err) {
-        if (!err?.response) {
-          console.log('No server response');
+      }));
+      setData(transformedData);
+    
+          setLoading(false);
+        } catch (err) {
+          if (!err?.response) {
+            console.log('No server response');
+          }
         }
       }
-    }
-
-    fetchData()}
-  }, [chainId, role, token]);
+    
+      fetchData();
+      
+  }}, [chainId, role, token]);
   return (
     <div className="list">
       <Sidebar/>
