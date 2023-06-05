@@ -54,39 +54,38 @@ const NewShop = ({ title }) => {
       id: 1,
       label: "name_shop",
       type: "text",
-      placeholder: "Chaneb Tacos",
-      
+     
     },
     {
         id: 2,
         label: "email",
         type: "text",
-        placeholder: "eyabelkadhi@gmail.com",
+        
     },
     {
         id: 3,
         label: "phone_number",
         type: "text",
-        placeholder: "98705040",
+        
     },
     {
         id: 4,
       label: "location",
       type: "text",
-      placeholder: "Ariana",
+      
       },
       {
         id: 5,
       label: "remise",
       type: "text",
-      placeholder: "20",
+      
       },
       
       {
         id: 6,
       label: "entryfee",
       type: "text",
-      placeholder: "10",
+     
       },
     {
         id: 7,

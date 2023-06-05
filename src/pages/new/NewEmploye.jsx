@@ -18,31 +18,31 @@ const NewEmploye = ({ title }) => {
       id: 1,
       label: "First name",
       type: "text",
-      placeholder: "John Doe",
+      
     },
     {
       id: 2,
       label: "Last name",
       type: "text",
-      placeholder: "Doe",
+      
     },
     {
       id: 3,
       label: "Email",
       type: "email",
-      placeholder: "john_doe@gmail.com",
+      
     },
     {
       id: 4,
       label: "Phone",
       type: "text",
-      placeholder: "+1 234 567 89",
+     
     },
     {
       id: 5,
       label: "Date of Birth",
       type: "date",
-      placeholder: "YYYY-MM-DD",
+      
     },
     {
       id: 6,

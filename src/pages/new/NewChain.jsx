@@ -31,7 +31,7 @@ const NewChain = ({ inputs, title }) => {
       id: 1,
       label: "Chain name",
       type: "text",
-      placeholder: "John Doe",
+      
     },
     {
       id: 2,
