@@ -174,7 +174,8 @@ function App() {
               
             </Route>
             <Route path="Profil">
-              <Route index element={<EditUser/>} />
+              <Route path="edit">
+              <Route index element={<EditUser/>}/></Route>
               </Route>
 
               <Route path="chains">

@@ -20,7 +20,6 @@ export default function User() {
 const [member,setMember]=useState([]);
 const [operation,setOperation]=useState([]);
 const token = localStorage.getItem("accessToken");
-const { userId } = useParams();
 const url = process.env.REACT_APP_URL;
 const [data, setData] = useState({
   id: "",
@@ -35,8 +34,48 @@ const [data, setData] = useState({
   statusBraclet :"",
   is_disabled:"",
 });
+
 const role =localStorage.getItem('role');
   const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`/GetAllInfoUserWeb`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: false,
+        });
+        console.log(response.data);
+        setUser(response.data)
+  
+        setLoading(false);
+      } catch (err) {
+        if (!err?.response) {
+          console.log('No server response');
+        }
+      }
+    }
+  
+    fetchData();
+  }, [token]);
+  useEffect(() => {
+    // Update the data state with default values from the user state
+    setData({
+      userId: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      image: "",
+      email: user.email,
+      phone: user.phone,
+      gender: user.gender,
+      birthDate: user.birthDate,
+      
+      
+    });
+  }, [user]);
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     
@@ -55,18 +94,12 @@ const role =localStorage.getItem('role');
   
 
 
-const handleChange = (e) => {
-  setData({
-    ...data,
-    [e.target.name]: e.target.value,
-  });
-};
 
 const handleSubmit = async (e) => {
   e.preventDefault();
 
   // Prepare the data to send in the request body
-  data.userId=userId;
+  //data.userId=userId;
   console.log(data)
 
   try {
@@ -131,7 +164,7 @@ const handleSubmit = async (e) => {
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{user.firstName}</span>
-              <span className="userShowUserTitle">Principal Users</span>
+              <span className="userShowUserTitle">{role} Users</span>
             </div>
           </div>
           <div className="userShowBottom">
@@ -206,21 +239,15 @@ const handleSubmit = async (e) => {
               </div>
               <div className='userUpdateItem'>
 <label for="gender">Gender</label>
-<select name="gender" id="gender" value={data.gender || ''}  onChange={e => setData({...data, gender: e.target.value})}>
+<select name="gender" id="gender" value={data.gender || ''} defaultValue={data.gender || ''}  onChange={e => setData({...data, gender: e.target.value})}>
   <option value="" disabled>Select gender</option>
-  <option value="Male" selected={user.gender === 'Male'}>Male</option>
-  <option value="Female" selected={user.gender === 'Female'}>Female</option>
+  <option value="Male" >Male</option>
+  <option value="Female" >Female</option>
 </select>
 </div>
 
 
-  <div className='userUpdateItem'>
-    <label htmlFor="is_disabled">Status bracelet</label>
-    <select name="is_disabled" id="is_disabled"  onChange={e => setData({...data, is_disabled: e.target.value})}>
-      <option value="false" selected={!user.bracelets[0].is_disabled}>Active</option>
-      <option value="true" selected={user.bracelets[0].is_disabled}>Inactive</option>
-    </select>
-  </div>
+  
 
 
 

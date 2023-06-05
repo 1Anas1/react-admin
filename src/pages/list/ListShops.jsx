@@ -21,44 +21,55 @@ const ListShops = () => {
   
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("accessToken");
+  const role =localStorage.getItem('role');
 
 
 
   useEffect(() => {
-    if (chainId) {
-      console.log(chainId);
-    async function fetchData() {
-      try {
-        const response = await axios.get(`${LOGIN_URL}/${chainId}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: false,
-        });
-        console.log(response?.data)
-        setData(response?.data);
-        
-        setLoading(false);
-      } catch (err) {
-        if (!err?.response) {
-          console.log('No server response');
+    if(role==="admin"){
+      async function fetchData() {
+        try {
+          const response = await axios.get(URL,{
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: false,
+          });
+          console.log(response?.data)
+          setData(response?.data);
+          
+          setLoading(false);
+        } catch (err) {
+          if (!err?.response) {
+            console.log('No server response');
+          }
         }
       }
+  
+      fetchData()
     }
-
-    fetchData();}
+    
     else {  async function fetchData() {
       try {
-        const response = await axios.get(URL,{
+        const token = localStorage.getItem("accessToken");
+        console.log(token);
+        const response = await axios.post('/getSellingPointsByUserId',{
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
           },
           withCredentials: false,
         });
         console.log(response?.data)
-        setData(response?.data);
+        const transformedData = response?.data.sellingPoints.map((sellingPoint) => ({
+          idUser: sellingPoint.ownerId._id,
+          id: sellingPoint.sellingPointId,
+          chainname: sellingPoint.chainId ? sellingPoint.chainId.chain_name : '',
+          img: sellingPoint.sellingPointImage,
+          owner: `${sellingPoint.ownerId.firstName} ${sellingPoint.ownerId.lastName}`,
+        }));
+        setData(transformedData);
         
         setLoading(false);
       } catch (err) {
@@ -68,8 +79,8 @@ const ListShops = () => {
       }
     }
 
-    fetchData();}
-  }, [chainId, token]);
+    fetchData()}
+  }, [chainId, role, token]);
   return (
     <div className="list">
       <Sidebar/>
